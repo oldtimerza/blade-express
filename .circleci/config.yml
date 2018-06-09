@@ -11,11 +11,9 @@ jobs:
     deployment:
       docker:
         - image: circleci/node:7  
-      steps:
-        - staging:
-            branch: master
-            heroku:
-              appname: blade-express
-        - run:
-              name: start
-              command: npm start
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
