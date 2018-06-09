@@ -1,0 +1,16 @@
+version: 2
+jobs:
+    build:
+        docker:
+            - image: circleci/node:7
+        steps:
+            - checkout
+            - run:
+                name: install-dependencies
+                command: npm install
+            - run:
+                name: tests
+                command: npm test
+            - deploy:
+                name: digital-ocean
+                command: ssh -o "StrictHostKeyChecking no" user@hostname "cd ~/../home/bladeexpres; git pull; npm install; npm run dev"
