@@ -11,8 +11,8 @@ jobs:
             - run:
                 name: tests
                 command: npm test
-            - deployment:
-              staging:
-                branch: master
-                heroku:
-                  appname: blade-express
+    deployment:
+      staging:
+        branch: master
+        heroku:
+          appname: blade-express
