@@ -12,6 +12,8 @@ jobs:
                 name: tests
                 command: npm test
     deployment:
+      docker:
+        - image: circleci/node:7  
       steps:
         - staging:
             branch: master
