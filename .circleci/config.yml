@@ -1,5 +1,18 @@
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: blade-express
+version: 2
+jobs:
+    build:
+        docker:
+            - image: circleci/node:7
+        steps:
+            - checkout
+            - run:
+                name: install-dependencies
+                command: npm install
+            - run:
+                name: tests
+                command: npm test
+            - deployment:
+              staging:
+                branch: master
+                heroku:
+                  appname: blade-express
