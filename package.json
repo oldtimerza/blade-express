@@ -4,11 +4,14 @@
   "description": "A website using word press calypso for blade express",
   "main": "index.js",
   "dependencies": {
+    "@zeit/next-css": "^0.2.0",
     "next": "^6.0.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "reactstrap": "^6.1.0"
+  },
   "scripts": {
     "build": "next build",
     "start": "npm run build && next start -p $PORT",
