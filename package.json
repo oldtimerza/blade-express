@@ -10,7 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "next",
+    "build": "next build",
+    "start": "npm run build && next start -p $PORT",
     "test": "test",
     "dev": "next"
   },
