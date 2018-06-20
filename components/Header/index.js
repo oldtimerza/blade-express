@@ -31,15 +31,22 @@ class Header extends Component {
   render() {
     return (
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
-        <Nav className="ml-auto" navbar>
+        <NavbarBrand href="/">BladeExpress</NavbarBrand>
+        <Nav className="mr-auto">
           <NavItem>
-            <NavLink href="/about">Components</NavLink>
+            <NavLink href="/">Visas</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="https://github.com/reactstrap/reactstrap">
-              GitHub
-            </NavLink>
+            <NavLink href="/">Courier</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/">Airport transfer</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/about">About us</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/">Contact us</NavLink>
           </NavItem>
         </Nav>
       </Navbar>
