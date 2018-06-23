@@ -1,15 +1,40 @@
 import { Jumbotron } from "reactstrap";
 
-const bannerStyle = {
-  backgroundImage: 'url("/static/images/visa-application.jpg")',
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center center",
-  backgroundSize: "cover",
-  minHeight: "500px"
-};
+import Loading from "../Loading";
+import FlameLinkStore from "../../static/js/flamelink-store";
 
-const Banner = props => {
-  return <Jumbotron style={bannerStyle} />;
-};
+class Banner extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageUrl: null
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.imageReference) {
+      FlameLinkStore.getInstance()
+        .getUrl(this.props.imageReference)
+        .then(response => {
+          console.log(response);
+          this.setState({ imageUrl: response });
+        });
+    }
+  }
+
+  render() {
+    if (this.state.imageUrl) {
+      const bannerStyle = {
+        backgroundImage: 'url("' + this.state.imageUrl + '")',
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
+        backgroundSize: "cover",
+        minHeight: "500px"
+      };
+      return <Jumbotron style={bannerStyle} />;
+    }
+    return <Loading />;
+  }
+}
 
 export default Banner;
