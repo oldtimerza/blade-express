@@ -14,40 +14,39 @@ import {
   DropdownItem
 } from "reactstrap";
 
+import FlameLinkStore from "../../static/js/flamelink-store";
+
 class Header extends Component {
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      menus: null
     };
   }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+
+  componentDidMount() {
+    FlameLinkStore.getInstance()
+      .getNavigation("mainNavigation")
+      .then(response => {
+        this.setState({ menus: response });
+      });
   }
+
   render() {
+    console.log(this.state.menus);
     return (
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">BladeExpress</NavbarBrand>
         <Nav className="mr-auto">
-          <NavItem>
-            <NavLink href="/">Visas</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/">Courier</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/">Airport transfer</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/about">About us</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/">Contact us</NavLink>
-          </NavItem>
+          {this.state.menus &&
+          this.state.menus.items &&
+          this.state.menus.items.length
+            ? this.state.menus.items.map(item => (
+                <NavItem key={item.id}>
+                  <NavLink href={item.url}>{item.title}</NavLink>
+                </NavItem>
+              ))
+            : null}
         </Nav>
       </Navbar>
     );

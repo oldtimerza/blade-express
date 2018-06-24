@@ -28,6 +28,10 @@ var FlameLinkStore = (function() {
       return this.app.storage.getURL(mediaReference);
     }.bind(object);
 
+    object.getNavigation = async function(navigationName) {
+      return this.app.nav.get(navigationName);
+    }.bind(object);
+
     return object;
   }
 
