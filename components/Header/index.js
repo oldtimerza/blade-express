@@ -33,7 +33,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.state.menus);
     return (
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">BladeExpress</NavbarBrand>

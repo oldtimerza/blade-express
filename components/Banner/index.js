@@ -16,7 +16,6 @@ class Banner extends React.Component {
       FlameLinkStore.getInstance()
         .getUrl(this.props.imageReference)
         .then(response => {
-          console.log(response);
           this.setState({ imageUrl: response });
         });
     }
