@@ -4,6 +4,7 @@ import { main } from "../theme";
 
 const textContainerStyle = {
   width: "100%",
+  padding: "auto",
   textAlign: "center !important"
 };
 
@@ -15,7 +16,7 @@ const InfoSection = props => {
   return (
     <Container>
       <Row>
-        <Col sm="12" md="8">
+        <Col>
           <div style={textContainerStyle}>
             <h2 style={main.summaryText}>{props.summary}</h2>
             <p style={descriptionTextStyle}>{props.description}</p>

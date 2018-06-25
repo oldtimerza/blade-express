@@ -1,5 +1,24 @@
+import { Container, Col, Row } from "reactstrap";
+
 const Footer = props => {
-  return <p>This is a footer</p>;
+  return (
+    <Container fluid>
+      <Row>
+        <Col>
+          <p>Nav</p>
+          <div style={{ minHeight: "200px" }} />
+        </Col>
+        <Col>
+          <p>Contact details</p>
+          <div style={{ minHeight: "200px" }} />
+        </Col>
+        <Col>
+          <p>banking details</p>
+          <div style={{ minHeight: "200px" }} />
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default Footer;

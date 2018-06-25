@@ -8,11 +8,9 @@ const Layout = props => (
   <div>
     <Header />
     {props.banner}
-    <Container>
+    <Container fluid>
       <Row>
-        <Col sm="12" md={{ size: 12, offset: 2 }}>
-          {props.children}
-        </Col>
+        <Col>{props.children}</Col>
       </Row>
     </Container>
     <Footer />
