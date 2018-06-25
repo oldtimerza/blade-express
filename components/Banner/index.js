@@ -22,17 +22,21 @@ class Banner extends React.Component {
   }
 
   render() {
+    const minHeight = "500px";
     if (this.state.imageUrl) {
       const bannerStyle = {
         backgroundImage: 'url("' + this.state.imageUrl + '")',
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         backgroundSize: "cover",
-        minHeight: "500px"
+        minHeight: minHeight
       };
       return <Jumbotron style={bannerStyle} />;
     }
-    return <Loading />;
+    const blankStyle = {
+      minHeight: minHeight
+    };
+    return <Jumbotron style={blankStyle} />;
   }
 }
 

@@ -1,12 +1,4 @@
-import {
-  Card,
-  Button,
-  CardImg,
-  CardTitle,
-  CardText,
-  CardSubtitle,
-  CardBody
-} from "reactstrap";
+import { Card, CardImg, CardTitle, CardText, CardBody } from "reactstrap";
 
 import FlameLinkStore from "../../static/js/flamelink-store";
 
@@ -29,14 +21,20 @@ class InfoCard extends React.Component {
   }
 
   render() {
+    if (this.state.imageUrl) {
+      return (
+        <Card>
+          <CardImg top width="100%" src={this.state.imageUrl} />
+          <CardBody>
+            <CardTitle>{this.props.title}</CardTitle>
+            <CardText>{this.props.text}</CardText>
+          </CardBody>
+        </Card>
+      );
+    }
     return (
       <Card>
-        <CardImg
-          top
-          width="100%"
-          src={this.state.imageUrl}
-          alt="ServiceImage"
-        />
+        <div style={{ width: "100%", minHeight: "162px" }} />
         <CardBody>
           <CardTitle>{this.props.title}</CardTitle>
           <CardText>{this.props.text}</CardText>
