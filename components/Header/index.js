@@ -35,7 +35,9 @@ class Header extends Component {
   render() {
     return (
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">BladeExpress</NavbarBrand>
+        <NavbarBrand href="/">
+          <img src="../../static/images/store_logo.png" />
+        </NavbarBrand>
         <Nav className="mr-auto">
           {this.state.menus &&
           this.state.menus.items &&
