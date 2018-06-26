@@ -1,7 +1,5 @@
 import { Card, CardImg, CardTitle, CardText, CardBody } from "reactstrap";
 
-import FlameLinkStore from "../../static/js/flamelink-store";
-
 class InfoCard extends React.Component {
   render() {
     if (this.props.imageUrl) {
