@@ -5,7 +5,7 @@ import { withLayout } from "../components/Layout";
 import Banner from "../components/Banner";
 
 export default class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps({ Component, router, ctx }) {
     const FlameLinkStore = await require("../static/js/flamelink-store")
       .default;
     let allProps = {};
