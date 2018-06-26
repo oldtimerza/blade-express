@@ -22,14 +22,16 @@ export default class MyApp extends App {
 
     allProps.navMenu = navMenu;
 
-    let bannerUrl = "";
-    const bannerResults = await FlameLinkStore.getInstance().getContent(
-      "banner"
-    );
-    bannerUrl =
-      bannerResults[Object.keys(bannerResults)[0]].imageDeck[0].imageUrl;
-    console.log(bannerUrl);
-    allProps.bannerUrl = bannerUrl;
+    if (router.route && router.route === "/") {
+      let bannerUrl = "";
+      const bannerResults = await FlameLinkStore.getInstance().getContent(
+        "banner"
+      );
+      bannerUrl =
+        bannerResults[Object.keys(bannerResults)[0]].imageDeck[0].imageUrl;
+      console.log(bannerUrl);
+      allProps.bannerUrl = bannerUrl;
+    }
 
     return { allProps };
   }
