@@ -6,7 +6,7 @@ import { withLayout } from "./withLayout";
 
 const Layout = props => (
   <div>
-    <Header />
+    <Header menus={props.menus} />
     {props.banner}
     <Container fluid>
       <Row>

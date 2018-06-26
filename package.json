@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@zeit/next-css": "^0.2.0",
+    "express": "^4.16.3",
     "firebase": "^5.1.0",
     "flamelink": "^0.17.1",
     "next": "^6.0.3",
@@ -16,9 +17,9 @@
   },
   "scripts": {
     "build": "next build",
-    "start": "npm run build && next start -p $PORT",
+    "start": "npm run build && node server.js",
     "test": "test",
-    "dev": "next"
+    "dev": "node server.js"
   },
   "repository": {
     "type": "git",
