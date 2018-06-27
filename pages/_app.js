@@ -29,7 +29,6 @@ export default class MyApp extends App {
       );
       bannerUrl =
         bannerResults[Object.keys(bannerResults)[0]].imageDeck[0].imageUrl;
-      console.log(bannerUrl);
       allProps.bannerUrl = bannerUrl;
     }
 
