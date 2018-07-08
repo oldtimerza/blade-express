@@ -10,18 +10,31 @@
     "firebase": "^5.1.0",
     "flamelink": "^0.17.1",
     "install": "^0.12.1",
-    "next": "^6.0.3",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "next": "latest",
+    "react": "16.4.1",
+    "react-dom": "16.4.1"
   },
   "devDependencies": {
-    "reactstrap": "^6.1.0"
+    "@babel/preset-es2015": "^7.0.0-beta.52",
+    "@babel/preset-react": "^7.0.0-beta.52",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "22.4.3",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "22.0.1",
+    "react-addons-test-utils": "15.6.2",
+    "react-test-renderer": "^16.4.1",
+    "reactstrap": "^6.1.0",
+    "sinon": "^6.1.3"
   },
   "scripts": {
     "build": "next build",
     "start": "npm run build && node server.js",
-    "test": "test",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",

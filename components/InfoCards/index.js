@@ -1,3 +1,5 @@
+import React from "react";
+
 import { CardDeck } from "reactstrap";
 
 import InfoCard from "./InfoCard";

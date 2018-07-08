@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Component } from "react";
+import React, { Component } from "react";
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 
 class Header extends Component {

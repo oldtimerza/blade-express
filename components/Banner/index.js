@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Jumbotron } from "reactstrap";
 
 class Banner extends React.Component {

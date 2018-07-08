@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Container, Col, Row } from "reactstrap";
 
 const Footer = props => {
