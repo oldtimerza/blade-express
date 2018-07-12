@@ -1,12 +1,15 @@
 {
-  "presets": ["env", "react"],
+  "presets": ["@babel/react"],
   "env": {
-    "development": {},
-    "production": {},
+    "development": {
+      "presets": ["next/babel"]
+    },
+    "production": {
+      "presets": ["next/babel"]
+    },
     "test": {
       "presets": [
-        "env",
-        "react",
+        "@babel/react",
         ["next/babel", { "preset-env": { "modules": "commonjs" } }]
       ]
     }
