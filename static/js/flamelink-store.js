@@ -21,7 +21,12 @@ var FlameLinkStore = (function() {
     object.app = flamelink({ firebaseApp });
 
     object.getContent = async function(contentName) {
-      return this.app.content.get(contentName);
+      const content = await this.app.content.get(contentName);
+      let results = [];
+      Object.keys(content).map(key =>
+        results.push({ ...content[key], id: key })
+      );
+      return results;
     }.bind(object);
 
     object.getUrl = async function(mediaReference) {

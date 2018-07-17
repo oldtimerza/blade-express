@@ -5,7 +5,7 @@ import InfoCards from "../components/InfoCards";
 
 const HomePage = props => {
   if (props && props.results) {
-    const firstResult = props.results[Object.keys(props.results)[0]];
+    const firstResult = props.results[0];
     const infoCardComponent = <InfoCards cards={firstResult.infoCardImages} />;
 
     return (

@@ -20,8 +20,7 @@ async function createBannerFromCMS(props, router, FlameLinkStore) {
     const bannerResults = await FlameLinkStore.getInstance().getContent(
       "banner"
     );
-    bannerUrl =
-      bannerResults[Object.keys(bannerResults)[0]].imageDeck[0].imageUrl;
+    bannerUrl = bannerResults[0].imageDeck[0].imageUrl;
     props.bannerUrl = bannerUrl;
   }
 }

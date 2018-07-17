@@ -7,10 +7,6 @@ const Footer = props => {
     <Container fluid>
       <Row>
         <Col>
-          <p>Nav</p>
-          <div style={{ minHeight: "200px" }} />
-        </Col>
-        <Col>
           <p>Contact details</p>
           <div style={{ minHeight: "200px" }} />
         </Col>
