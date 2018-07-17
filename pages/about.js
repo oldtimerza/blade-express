@@ -8,4 +8,4 @@ const About = () => (
   </div>
 );
 
-export default withLayout(<About />);
+export default About;
