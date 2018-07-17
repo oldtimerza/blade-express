@@ -6,6 +6,6 @@ import Footer from "../../components/Footer";
 describe("<Footer/>", () => {
   it("should render", () => {
     const wrapper = shallow(<Footer />);
-    expect(wrapper).not.toBe(0);
+    expect(wrapper.length).not.toBe(0);
   });
 });

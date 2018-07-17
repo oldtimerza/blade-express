@@ -11,6 +11,6 @@ describe("<InfoSection/>", () => {
       </InfoSection>
     );
     const wrapper = shallow(component);
-    expect(wrapper).not.toBe(0);
+    expect(wrapper.length).not.toBe(0);
   });
 });

@@ -7,6 +7,6 @@ describe("<Layout/>", () => {
   it("should render", () => {
     const Component = withLayout(<div />, <div />);
     const wrapper = shallow(<Component />);
-    expect(wrapper).not.toBe(0);
+    expect(wrapper.length).not.toBe(0);
   });
 });

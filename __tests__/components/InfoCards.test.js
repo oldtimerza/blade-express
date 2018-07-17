@@ -14,6 +14,6 @@ describe("<InfoCards/>", () => {
       }
     ];
     const wrapper = shallow(<InfoCards cards={cards} />);
-    expect(wrapper).not.toBe(0);
+    expect(wrapper.length).not.toBe(0);
   });
 });

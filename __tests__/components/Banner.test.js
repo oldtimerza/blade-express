@@ -7,6 +7,6 @@ describe("<Banner/>", () => {
   it("should render", () => {
     const imageUrl = "Test.jpg";
     const wrapper = shallow(<Banner imageUrl={imageUrl} />);
-    expect(wrapper).not.toBe(0);
+    expect(wrapper.length).not.toBe(0);
   });
 });
