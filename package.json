@@ -4,7 +4,6 @@
   "description": "A website using word press calypso for blade express",
   "main": "index.js",
   "dependencies": {
-    "@babel/preset-env": "^7.0.0-beta.53",
     "@zeit/next-css": "^0.2.0",
     "compression": "^1.7.2",
     "express": "^4.16.3",
@@ -16,7 +15,6 @@
     "react-dom": "16.4.1"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.0.0-beta.53",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "22.4.3",
     "enzyme": "3.2.0",
@@ -32,8 +30,8 @@
     "start": "npm run build && node server.js",
     "dev": "node server.js",
     "test": "SET \"NODE_ENV=test\"&& jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:watch": "SET \"NODE_ENV=test\"&& jest --watch",
+    "test:coverage": "SET \"NODE_ENV=test\"&& jest --coverage"
   },
   "repository": {
     "type": "git",
