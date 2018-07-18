@@ -16,7 +16,7 @@ jobs:
         - run:
             name: List Directories
             command: |
-              ls
+              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'ls'
         - run:
             name: Deploy over SSH to Digital Ocean
             command: |
