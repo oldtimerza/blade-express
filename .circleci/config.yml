@@ -16,7 +16,7 @@ jobs:
         - run:
             name: Deploy image to Docker
             command: |
-              docker build -t oldtimerza/blade-express
+              docker build -t oldtimerza/blade-express .
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
               docker push oldtimerza/blade-express
         - run:
