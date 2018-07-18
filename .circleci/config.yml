@@ -14,13 +14,15 @@ jobs:
       steps:
         - checkout
         - run:
-            name: List Directories
+            name: Deploy image to Docker
             command: |
-              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'ls'
+              docker build -t oldtimerza/blade-express
+              docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+              docker push oldtimerza/blade-express
         - run:
             name: Deploy over SSH to Digital Ocean
             command: |
-              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'git checkout master; git pull; yarn; yarn start;'
+              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'echo "todo"'
 
 workflows:
   version: 2
