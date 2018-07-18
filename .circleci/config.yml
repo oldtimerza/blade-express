@@ -16,7 +16,7 @@ jobs:
         - run:
             name: Deploy over SSH to Digital Ocean
             command: |
-              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'cd ~/bladeexpres; git checkout master; git pull; yarn; yarn start;'
+              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'cd /home/circleci/project; git checkout master; git pull; yarn; yarn start;'
 
 workflows:
   version: 2
