@@ -30,9 +30,9 @@ jobs:
               docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
               docker push oldtimerza/blade-express
         - run:
-            name: Deploy over SSH to Digital Ocean
+            name: Run docker image on Digital Ocean Droplet
             command: |
-              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'echo "todo"'
+              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'docker pull oldtimerza/blade-express && docker run -d -t -p 3000:8080 --name app oldtimerza/blade-express'
 
 workflows:
   version: 2
