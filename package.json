@@ -5,12 +5,14 @@
   "main": "index.js",
   "dependencies": {
     "@zeit/next-css": "^0.2.0",
+    "@zeit/next-sass": "^0.2.0",
     "compression": "^1.7.2",
     "express": "^4.16.3",
     "firebase": "^5.1.0",
     "flamelink": "^0.17.1",
     "install": "^0.12.1",
     "next": "latest",
+    "node-sass": "^4.9.2",
     "react": "16.4.1",
     "react-dom": "16.4.1",
     "reactstrap": "^6.1.0"

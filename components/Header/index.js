@@ -1,11 +1,12 @@
-import Link from "next/link";
 import React, { Component } from "react";
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
+
+import css from "./styling.scss";
 
 class Header extends Component {
   render() {
     return (
-      <Navbar color="light" light expand="md">
+      <Navbar className={css.navbar} expand="md">
         <NavbarBrand href="/">
           <img src="../../static/images/store_logo.png" />
         </NavbarBrand>
@@ -15,7 +16,9 @@ class Header extends Component {
           this.props.menus.items.length
             ? this.props.menus.items.map(item => (
                 <NavItem key={item.id}>
-                  <NavLink href={item.url}>{item.title}</NavLink>
+                  <NavLink href={item.url} className={css.navbar_link}>
+                    {item.title}
+                  </NavLink>
                 </NavItem>
               ))
             : null}

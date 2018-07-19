@@ -1,0 +1,14 @@
+@import "../../theme.global.scss";
+.navbar {
+  background-color: $white;
+  height: 60px;
+}
+
+.navbar_link {
+  font-family: $primary-font;
+  color: $primary-color;
+}
+
+.navbar_link:hover {
+  color: $decline-color;
+}
