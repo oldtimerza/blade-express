@@ -32,7 +32,7 @@ jobs:
         - run:
             name: Run docker image on Digital Ocean Droplet
             command: |
-              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'docker pull oldtimerza/blade-express && docker run -d -t -p 80:3000 --name app oldtimerza/blade-express'
+              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'docker pull oldtimerza/blade-express && docker stop app && docker rm app && docker run -d -t -p 80:3000 --name app oldtimerza/blade-express'
 
 workflows:
   version: 2
