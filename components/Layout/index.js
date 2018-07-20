@@ -15,7 +15,7 @@ const Layout = props => (
         <Col>{props.children}</Col>
       </Row>
     </Container>
-    <Footer />
+    <Footer details={props.footer} />
   </div>
 );
 

@@ -25,6 +25,12 @@ async function createBannerFromCMS(props, router, FlameLinkStore) {
   }
 }
 
+async function setupFooterFromCMS(props, FlameLinkStore) {
+  let footer = {};
+  footer = await FlameLinkStore.getInstance().getContent("footer");
+  props.footer = footer[0];
+}
+
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     const FlameLinkStore = await require("../static/js/flamelink-store")
@@ -40,7 +46,7 @@ export default class MyApp extends App {
 
     await setUpNavMenuFromCMS(allProps, FlameLinkStore);
     await createBannerFromCMS(allProps, router, FlameLinkStore);
-
+    await setupFooterFromCMS(allProps, FlameLinkStore);
     return { allProps };
   }
 
@@ -53,6 +59,8 @@ export default class MyApp extends App {
         <Banner imageUrl={allProps.bannerUrl} />
       );
     }
-    return <RenderComponent menus={allProps.navMenu} />;
+    return (
+      <RenderComponent menus={allProps.navMenu} footer={allProps.footer} />
+    );
   }
 }
