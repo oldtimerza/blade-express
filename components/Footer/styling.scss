@@ -1,0 +1,13 @@
+@import "../../theme.global.scss";
+
+.containing_div {
+  background-color: $decline-color;
+  font-family: $primary-font;
+  font-size: $font-size-minor;
+  color: $white;
+  padding: 10px;
+}
+
+.descriptive_text {
+  font-size: $font-size-description;
+}
