@@ -1,0 +1,24 @@
+@import "../../theme.global.scss";
+
+.card {
+  border: 0px;
+}
+
+.card:hover {
+  color: $primary-color;
+}
+
+.cardImage {
+}
+
+.cardTitle {
+  padding: auto;
+  text-align: center;
+  font-size: $font-size-mid;
+  font-family: $primary-font;
+}
+
+.cardText {
+  font-family: $primary-font;
+  font-size: $font-size-minor;
+}
