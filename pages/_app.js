@@ -14,15 +14,11 @@ function isHome(router) {
   return router.route && router.route === "/";
 }
 
-async function createBannerFromCMS(props, router, FlameLinkStore) {
-  if (isHome(router)) {
-    let bannerUrl = "";
-    const bannerResults = await FlameLinkStore.getInstance().getContent(
-      "banner"
-    );
-    bannerUrl = bannerResults[0].imageDeck[0].imageUrl;
-    props.bannerUrl = bannerUrl;
-  }
+async function createBannerFromCMS(props, FlameLinkStore) {
+  let bannerUrl = "";
+  const bannerResults = await FlameLinkStore.getInstance().getContent("banner");
+  bannerUrl = bannerResults[0].imageDeck[0].imageUrl;
+  props.bannerUrl = bannerUrl;
 }
 
 async function setupFooterFromCMS(props, FlameLinkStore) {
@@ -45,7 +41,9 @@ export default class MyApp extends App {
     allProps.pageProps = pageProps;
 
     await setUpNavMenuFromCMS(allProps, FlameLinkStore);
-    await createBannerFromCMS(allProps, router, FlameLinkStore);
+    if (isHome(router)) {
+      await createBannerFromCMS(allProps, FlameLinkStore);
+    }
     await setupFooterFromCMS(allProps, FlameLinkStore);
     return { allProps };
   }

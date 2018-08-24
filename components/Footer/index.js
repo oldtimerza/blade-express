@@ -3,16 +3,17 @@ import { Container, Col, Row } from "reactstrap";
 
 import Address from "./Address";
 import ContactInformation from "./ContactInformation";
+import NavMenu from "./NavMenu";
 import css from "./styling.scss";
 
 const Footer = props => {
-  let { details } = props;
+  let { details, menus } = props;
   return (
     <div className={css.containing_div}>
       <Container fluid>
         <Row>
           <Col xs="12" md="6">
-            <div />
+            <NavMenu menus={menus} />
           </Col>
           <Col xs="12" md="3">
             <Address

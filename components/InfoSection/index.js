@@ -3,10 +3,6 @@ import { Container, Row, Col } from "reactstrap";
 
 import css from "./styling.scss";
 
-const descriptionTextStyle = {};
-
-const childrenStyle = {};
-
 const InfoSection = props => {
   return (
     <div className={css.spacer}>
@@ -17,7 +13,7 @@ const InfoSection = props => {
               <h2 className={css.summaryText}>{props.summary}</h2>
               <p className={css.descriptionTextStyle}>{props.description}</p>
             </div>
-            <div style={childrenStyle}>{props.children}</div>
+            <div style={props.childrenStyle}>{props.children}</div>
           </Col>
         </Row>
       </Container>

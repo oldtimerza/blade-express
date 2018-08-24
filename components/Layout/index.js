@@ -15,7 +15,7 @@ const Layout = props => (
         <Col>{props.children}</Col>
       </Row>
     </Container>
-    <Footer details={props.footer} />
+    <Footer details={props.footer} menus={props.menus} />
   </div>
 );
 
