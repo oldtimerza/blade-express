@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
+import PropTypes from "prop-types";
 
 import css from "./styling.scss";
 
@@ -19,6 +20,12 @@ const InfoSection = props => {
       </Container>
     </div>
   );
+};
+
+InfoSection.propTypes = {
+  summary: PropTypes.string,
+  childrenStyle: PropTypes.object,
+  children: PropTypes.arrayOf(PropTypes.Component)
 };
 
 export default InfoSection;

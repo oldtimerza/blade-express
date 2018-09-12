@@ -2,6 +2,7 @@ import React from "react";
 
 import InfoSection from "../components/InfoSection";
 import InfoCards from "../components/InfoCards";
+import Loading from "../components/Loading";
 
 const HomePage = props => {
   if (props && props.results) {
@@ -17,7 +18,7 @@ const HomePage = props => {
       </InfoSection>
     );
   }
-  return <p>Loading...</p>;
+  return <Loading />;
 };
 
 HomePage.getInitialProps = async function({ req }) {
