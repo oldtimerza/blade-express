@@ -1,7 +1,7 @@
 {
   "name": "bladeexpress",
   "version": "1.0.0",
-  "description": "A website using word press calypso for blade express",
+  "description": "A website using next js for blade express",
   "main": "index.js",
   "dependencies": {
     "@zeit/next-css": "^0.2.0",
@@ -37,12 +37,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oldtimerza/bladeexpres.git"
+    "url": "git+https://github.com/oldtimerza/bladeexpress.git"
   },
   "author": "Bradley Morris",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/oldtimerza/bladeexpres/issues"
+    "url": "https://github.com/oldtimerza/bladeexpress/issues"
   },
-  "homepage": "https://github.com/oldtimerza/bladeexpres#readme"
+  "homepage": "https://github.com/oldtimerza/bladeexpress#readme"
 }
