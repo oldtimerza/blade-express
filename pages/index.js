@@ -23,7 +23,7 @@ const HomePage = props => {
 
 HomePage.getInitialProps = async function({ req }) {
   const FlameLinkStore = await require("../static/js/flamelink-store").default;
-  const res = await FlameLinkStore.getInstance().getContent("homePage");
+  const res = await FlameLinkStore.getStore().getContent("homePage");
   return {
     results: res
   };

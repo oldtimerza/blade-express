@@ -12,7 +12,7 @@ const Visas = props => {
 
 Visas.getInitialProps = async function({ req }) {
   const FlameLinkStore = await require("../static/js/flamelink-store").default;
-  const res = await FlameLinkStore.getInstance().getContent("visaSummary");
+  const res = await FlameLinkStore.getStore().getContent("visaSummary");
   return {
     results: res
   };

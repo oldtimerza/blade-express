@@ -5,7 +5,7 @@ var FlameLinkStore = (function() {
   var instance;
 
   function createInstance() {
-    var object = new Object();
+    var store = new Object();
 
     const config = {
       apiKey: "AIzaSyCF-1BA9qhl4SR4U8Iut-yUCy3yioFQ5MA",
@@ -18,30 +18,30 @@ var FlameLinkStore = (function() {
     const firebaseApp = firebase.apps.length
       ? firebase.app()
       : firebase.initializeApp(config);
-    object.app = flamelink({ firebaseApp });
+    store.app = flamelink({ firebaseApp });
 
-    object.getContent = async function(contentName) {
+    store.getContent = async function(contentName) {
       const content = await this.app.content.get(contentName);
       let results = [];
       Object.keys(content).map(key =>
         results.push({ ...content[key], id: key })
       );
       return results;
-    }.bind(object);
+    }.bind(store);
 
-    object.getUrl = async function(mediaReference) {
+    store.getUrl = async function(mediaReference) {
       return this.app.storage.getURL(mediaReference);
-    }.bind(object);
+    }.bind(store);
 
-    object.getNavigation = async function(navigationName) {
+    store.getNavigation = async function(navigationName) {
       return this.app.nav.get(navigationName);
-    }.bind(object);
+    }.bind(store);
 
-    return object;
+    return store;
   }
 
   return {
-    getInstance: function() {
+    getStore: function() {
       if (!instance) {
         instance = createInstance();
       }

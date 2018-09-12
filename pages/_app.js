@@ -6,7 +6,7 @@ import Banner from "../components/Banner";
 
 async function setUpNavMenuFromCMS(props, FlameLinkStore) {
   let navMenu = {};
-  navMenu = await FlameLinkStore.getInstance().getNavigation("mainNavigation");
+  navMenu = await FlameLinkStore.getStore().getNavigation("mainNavigation");
   props.navMenu = navMenu;
 }
 
@@ -16,14 +16,14 @@ function isHome(router) {
 
 async function createBannerFromCMS(props, FlameLinkStore) {
   let bannerUrl = "";
-  const bannerResults = await FlameLinkStore.getInstance().getContent("banner");
+  const bannerResults = await FlameLinkStore.getStore().getContent("banner");
   bannerUrl = bannerResults[0].imageDeck[0].imageUrl;
   props.bannerUrl = bannerUrl;
 }
 
 async function setupFooterFromCMS(props, FlameLinkStore) {
   let footer = {};
-  footer = await FlameLinkStore.getInstance().getContent("footer");
+  footer = await FlameLinkStore.getStore().getContent("footer");
   props.footer = footer[0];
 }
 
