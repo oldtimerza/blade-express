@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CardDeck } from "reactstrap";
+import { CardDeck, Card } from "reactstrap";
 
 import InfoCard from "./InfoCard";
 
@@ -10,18 +10,23 @@ const InfoCards = props => {
   const remainder = count % maxNumberOfColumns;
   const numberOfRows = (count - remainder) / maxNumberOfColumns;
   let rows = [];
-  for (var j = 0; j < numberOfRows; j++) {
+  for (var j = 0; j < numberOfRows + 1; j++) {
     let columns = [];
     for (var i = 0; i < maxNumberOfColumns; i++) {
-      columns.push(
-        <InfoCard
-          imageUrl={cards[i].imageUrl}
-          title={cards[i].title}
-          text={cards[i].description}
-        />
-      );
+      const index = i + j * maxNumberOfColumns;
+      if (index < count) {
+        columns.push(
+          <InfoCard
+            imageUrl={cards[index].imageUrl}
+            title={cards[index].title}
+            text={cards[index].description}
+          />
+        );
+      } else {
+        columns.push(<Card />);
+      }
     }
-    rows.push(<CardDeck key={j}>{columns}</CardDeck>);
+    rows.push(<CardDeck key={i + j * maxNumberOfColumns}>{columns}</CardDeck>);
   }
   return <div>{rows}</div>;
 };
