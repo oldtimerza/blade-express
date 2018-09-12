@@ -4,7 +4,6 @@ import { Container, Row, Col, Alert } from "reactstrap";
 
 import Header from "../Header";
 import Footer from "../Footer";
-import { withLayout } from "./withLayout";
 
 const Layout = props => (
   <div>
@@ -24,4 +23,3 @@ const Layout = props => (
 );
 
 export default Layout;
-export { withLayout };

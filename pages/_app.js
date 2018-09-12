@@ -1,7 +1,7 @@
 import App from "next/app";
 import React from "react";
 
-import { withLayout } from "../components/Layout";
+import Layout from "../components/Layout";
 import Banner from "../components/Banner";
 
 async function setUpNavMenuFromCMS(props, FlameLinkStore) {
@@ -50,15 +50,21 @@ export default class MyApp extends App {
 
   render() {
     const { Component, allProps, router } = this.props;
-    let RenderComponent = withLayout(<Component {...allProps.pageProps} />);
     if (isHome(router)) {
-      RenderComponent = withLayout(
-        <Component {...allProps.pageProps} />,
-        <Banner imageUrl={allProps.bannerUrl} />
+      return (
+        <Layout
+          menus={allProps.navMenu}
+          footer={allProps.footer}
+          banner={<Banner imageUrl={allProps.bannerUrl} />}
+        >
+          <Component {...allProps.pageProps} />
+        </Layout>
       );
     }
     return (
-      <RenderComponent menus={allProps.navMenu} footer={allProps.footer} />
+      <Layout menus={allProps.navMenu} footer={allProps.footer}>
+        <Component {...allProps.pageProps} />
+      </Layout>
     );
   }
 }

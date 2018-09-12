@@ -1,12 +1,11 @@
 import { shallow } from "enzyme";
 import React from "react";
 
-import { withLayout } from "../../components/Layout/withLayout";
+import Layout from "../../components/Layout";
 
 describe("<Layout/>", () => {
   it("should render", () => {
-    const Component = withLayout(<div />, <div />);
-    const wrapper = shallow(<Component />);
+    const wrapper = shallow(<Layout />);
     expect(wrapper.length).not.toBe(0);
   });
 });
