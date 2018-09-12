@@ -1,38 +1,38 @@
 version: 2
 jobs:
-    build:
-        docker:
-            - image: circleci/node:7
-        steps:
-            - checkout
-            - restore_cache:
-                name: Restore Yarn Package Cache
-                keys:
-                  - yarn-packages-{{ checksum "yarn.lock" }}
-            - run:
-                name: Install Dependencies
-                command: yarn install
-            - save_cache:
-                name: Save Yarn Package Cache
-                key: yarn-packages-{{ checksum "yarn.lock" }}
-                paths:
-                  - ~/.cache/yarn
-    deploy:
-      docker:
-        - image: circleci/node:7  
-      steps:
-        - checkout
-        - setup_remote_docker
-        - run:
-            name: Deploy image to Docker Hub
-            command: |
-              docker build --build-arg DOCKER_USER=$DOCKER_USER --build-arg DOCKER_PASSWORD=$DOCKER_PASSWORD -t oldtimerza/blade-express .
-              docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-              docker push oldtimerza/blade-express
-        - run:
-            name: Run docker image on Digital Ocean Droplet
-            command: |
-              ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'docker pull oldtimerza/blade-express && docker stop app && docker rm app && docker run -d -t -p 80:3000 --name app oldtimerza/blade-express'
+  build:
+    docker:
+      - image: circleci/node:7
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+  deploy:
+    docker:
+      - image: circleci/node:7
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Deploy image to Docker Hub
+          command: |
+            docker build --build-arg DOCKER_USER=$DOCKER_USER --build-arg DOCKER_PASSWORD=$DOCKER_PASSWORD --build-arg NODE_ENV=$NODE_ENV -t oldtimerza/blade-express .
+            docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker push oldtimerza/blade-express
+      - run:
+          name: Run docker image on Digital Ocean Droplet
+          command: |
+            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'docker pull oldtimerza/blade-express && docker stop app && docker rm app && docker run -d -t -p 80:3000 --name app oldtimerza/blade-express'
 
 workflows:
   version: 2
