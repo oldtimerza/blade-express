@@ -1,4 +1,5 @@
 import { shallow } from "enzyme";
+
 import About from "../../pages/about";
 
 describe("index page", () => {

@@ -1,4 +1,5 @@
 import { shallow } from "enzyme";
+
 import Catalog from "../../components/Catalog";
 
 describe("<Catalog/>", () => {
