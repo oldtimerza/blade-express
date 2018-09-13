@@ -20,8 +20,14 @@ var FlameLinkStore = (function() {
       : firebase.initializeApp(config);
     store.app = flamelink({ firebaseApp });
 
-    store.getContent = async function(contentName) {
-      const content = await this.app.content.get(contentName);
+    store.getContent = async function(contentName, options) {
+      let content = {};
+      if (options) {
+        content = await this.app.content.get(contentName, options);
+      } else {
+        content = await this.app.content.get(contentName);
+      }
+
       let results = [];
       Object.keys(content).map(key =>
         results.push({ ...content[key], id: key })

@@ -12,11 +12,7 @@ const Catalog = props => {
       title: product.title,
       description: product.cost
     }));
-    return (
-      <Section>
-        <Cards cards={cards} maxNumberOfColumns={5} />
-      </Section>
-    );
+    return <Cards cards={cards} maxNumberOfColumns={5} />;
   }
   return <Loading />;
 };
