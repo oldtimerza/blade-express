@@ -1,6 +1,6 @@
 import { shallow } from "enzyme";
 
-import Visas from "../pages/visas";
+import Visas from "../../pages/visas";
 
 describe("visas page", () => {
   it("should render", () => {
