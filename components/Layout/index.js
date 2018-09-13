@@ -4,6 +4,7 @@ import { Container, Row, Col, Alert } from "reactstrap";
 
 import Header from "../Header";
 import Footer from "../Footer";
+import css from "./styling.scss";
 
 const Layout = props => (
   <div>
@@ -13,12 +14,12 @@ const Layout = props => (
     </Alert>
     <Header menus={props.menus} />
     {props.banner}
-    <Container fluid>
+    <Container className={css.body} fluid>
       <Row>
         <Col>{props.children}</Col>
       </Row>
     </Container>
-    <Footer details={props.footer} menus={props.menus} />
+    <Footer className={css.footer} details={props.footer} menus={props.menus} />
   </div>
 );
 
