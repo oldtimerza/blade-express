@@ -3,7 +3,7 @@ import { Card, CardImg, CardTitle, CardText, CardBody } from "reactstrap";
 
 import css from "./styling.scss";
 
-class InfoCard extends React.Component {
+class MediaCard extends React.Component {
   render() {
     if (this.props.imageUrl) {
       return (
@@ -33,4 +33,4 @@ class InfoCard extends React.Component {
   }
 }
 
-export default InfoCard;
+export default MediaCard;

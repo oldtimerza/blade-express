@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 
-import InfoCards from "../InfoCards";
-import InfoSection from "../InfoSection";
+import Cards from "../Cards";
+import Section from "../Section";
 import Loading from "../Loading";
 
-const ProductCatalog = props => {
+const Catalog = props => {
   const { products } = props;
   if (products && products.length) {
     const cards = products.map(product => ({
@@ -13,15 +13,15 @@ const ProductCatalog = props => {
       description: product.cost
     }));
     return (
-      <InfoSection>
-        <InfoCards cards={cards} maxNumberOfColumns={5} />
-      </InfoSection>
+      <Section>
+        <Cards cards={cards} maxNumberOfColumns={5} />
+      </Section>
     );
   }
   return <Loading />;
 };
 
-ProductCatalog.propTypes = {
+Catalog.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
       imageUrl: PropTypes.string,
@@ -31,4 +31,4 @@ ProductCatalog.propTypes = {
   )
 };
 
-export default ProductCatalog;
+export default Catalog;

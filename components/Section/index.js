@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import css from "./styling.scss";
 
-const InfoSection = props => {
+const Section = props => {
   return (
     <div className={css.spacer}>
       <Container>
@@ -22,10 +22,10 @@ const InfoSection = props => {
   );
 };
 
-InfoSection.propTypes = {
+Section.propTypes = {
   summary: PropTypes.string,
   childrenStyle: PropTypes.object,
   children: PropTypes.arrayOf(PropTypes.Component)
 };
 
-export default InfoSection;
+export default Section;

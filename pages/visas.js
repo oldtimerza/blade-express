@@ -1,11 +1,11 @@
 import React from "react";
 
-import ProductCatalog from "../components/ProductCatalog";
+import Catalog from "../components/Catalog";
 import Loading from "../components/Loading";
 
 const Visas = props => {
   if (props && props.results && props.results.length) {
-    return <ProductCatalog products={props.results} />;
+    return <Catalog products={props.results} />;
   }
   return <Loading />;
 };

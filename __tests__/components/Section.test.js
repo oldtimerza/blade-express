@@ -1,14 +1,14 @@
 import { shallow } from "enzyme";
 import React from "react";
 
-import InfoSection from "../../components/InfoSection";
+import Section from "../../components/Section";
 
-describe("<InfoSection/>", () => {
+describe("<Section/>", () => {
   it("should render", () => {
     const component = (
-      <InfoSection summary="summary" description="desccr">
+      <Section summary="summary" description="desccr">
         <div />
-      </InfoSection>
+      </Section>
     );
     const wrapper = shallow(component);
     expect(wrapper.length).not.toBe(0);

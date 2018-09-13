@@ -1,9 +1,9 @@
 import { shallow } from "enzyme";
 import React from "react";
 
-import InfoCards from "../../components/InfoCards";
+import Cards from "../../components/Cards";
 
-describe("<InfoCards/>", () => {
+describe("<Cards/>", () => {
   it("should render", () => {
     const cards = [
       {
@@ -13,7 +13,7 @@ describe("<InfoCards/>", () => {
         description: "description"
       }
     ];
-    const wrapper = shallow(<InfoCards cards={cards} />);
+    const wrapper = shallow(<Cards cards={cards} />);
     expect(wrapper.length).not.toBe(0);
   });
 });

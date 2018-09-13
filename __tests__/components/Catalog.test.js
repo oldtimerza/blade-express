@@ -1,12 +1,12 @@
 import { shallow } from "enzyme";
-import ProductCatalog from "../../components/ProductCatalog";
+import Catalog from "../../components/Catalog";
 
-describe("<ProductCatalog />", () => {
+describe("<Catalog/>", () => {
   it("should render", () => {
     const products = [
       { imageUrl: "iamge", title: "Title", description: "R10" }
     ];
-    const wrapper = shallow(<ProductCatalog products={products} />);
+    const wrapper = shallow(<Catalog products={products} />);
     expect(wrapper.length).toBe(1);
   });
 });

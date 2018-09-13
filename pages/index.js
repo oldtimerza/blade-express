@@ -1,21 +1,21 @@
 import React from "react";
 
-import InfoSection from "../components/InfoSection";
-import InfoCards from "../components/InfoCards";
+import Section from "../components/Section";
+import Cards from "../components/Cards";
 import Loading from "../components/Loading";
 
 const HomePage = props => {
   if (props && props.results) {
     const firstResult = props.results[0];
-    const infoCardComponent = <InfoCards cards={firstResult.infoCardImages} />;
+    const infoCardComponent = <Cards cards={firstResult.infoCardImages} />;
 
     return (
-      <InfoSection
+      <Section
         summary="Our services"
         description="We provide a host of services"
       >
         {infoCardComponent}
-      </InfoSection>
+      </Section>
     );
   }
   return <Loading />;

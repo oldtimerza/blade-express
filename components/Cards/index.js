@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { CardDeck, Card } from "reactstrap";
 
-import InfoCard from "./InfoCard";
+import MediaCard from "./MediaCard";
 
-const InfoCards = props => {
+const Cards = props => {
   const { maxNumberOfColumns, cards } = props;
   const count = cards.length;
   const remainder = count % maxNumberOfColumns;
@@ -16,7 +16,7 @@ const InfoCards = props => {
       const index = i + j * maxNumberOfColumns;
       if (index < count) {
         columns.push(
-          <InfoCard
+          <MediaCard
             imageUrl={cards[index].imageUrl}
             title={cards[index].title}
             text={cards[index].description}
@@ -31,11 +31,11 @@ const InfoCards = props => {
   return <div>{rows}</div>;
 };
 
-InfoCards.defaultProps = {
+Cards.defaultProps = {
   maxNumberOfColumns: 3
 };
 
-InfoCards.propTypes = {
+Cards.propTypes = {
   cards: PropTypes.arrayOf(
     PropTypes.shape({
       imageUrl: PropTypes.string,
@@ -46,4 +46,4 @@ InfoCards.propTypes = {
   maxNumberOfColumns: PropTypes.number
 };
 
-export default InfoCards;
+export default Cards;
