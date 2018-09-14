@@ -26,8 +26,10 @@ class Visas extends React.Component {
       this.setState({ filteredResults: results });
       return;
     }
-    const regex = new RegExp(search);
-    const filteredResults = results.filter(result => regex.test(result.title));
+    const regex = new RegExp(search.toLowerCase());
+    const filteredResults = results.filter(result =>
+      regex.test(result.title.toLowerCase())
+    );
     this.setState({ filteredResults });
   };
 
