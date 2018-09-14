@@ -36,8 +36,6 @@ class Visas extends React.Component {
   changeCategory = category => {
     const filter = { selectedCategory: category };
     this.setState({ loading: true, filter }, async () => {
-      const FlameLinkStore = await require("../static/js/flamelink-store")
-        .default;
       const results = await FlameLinkStore.getStore().getContent(
         "visaSummary",
         {
@@ -79,6 +77,7 @@ class Visas extends React.Component {
 }
 
 Visas.defaultProps = {
+  results: [],
   filter: { selectedCategory: { name: "Africa" } }
 };
 

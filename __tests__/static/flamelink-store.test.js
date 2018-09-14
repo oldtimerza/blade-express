@@ -38,7 +38,7 @@ describe("FlameLinkStore", () => {
         { id: "someId2", someData: "data" }
       ]);
     } catch (e) {
-      expect(true).toBe(false);
+      throw new Error("something failed the FlameLinkStore schema test");
     }
   });
 });
