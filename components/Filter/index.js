@@ -4,8 +4,13 @@ import {
   Dropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  InputGroup,
+  Input
 } from "reactstrap";
+
+import { FilterContext } from "../../contexts/filter-context";
+import { SearchContext } from "../../contexts/search-context";
 
 class Filter extends React.Component {
   constructor(props) {
@@ -25,18 +30,36 @@ class Filter extends React.Component {
   render() {
     const { categories, filter } = this.props;
     return (
-      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle caret>{filter.selectedCategory.name}</DropdownToggle>
-        <DropdownMenu>
-          {categories && categories.length
-            ? categories.map(category => (
-                <DropdownItem tag="a" href={"/visas?category=" + category.name}>
-                  {category.name}
-                </DropdownItem>
-              ))
-            : null}
-        </DropdownMenu>
-      </Dropdown>
+      <div>
+        <FilterContext.Consumer>
+          {({ onCategoryChange }) => (
+            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+              <DropdownToggle caret>
+                {filter.selectedCategory.name}
+              </DropdownToggle>
+              <DropdownMenu>
+                {categories && categories.length
+                  ? categories.map(category => (
+                      <DropdownItem onClick={() => onCategoryChange(category)}>
+                        {category.name}
+                      </DropdownItem>
+                    ))
+                  : null}
+              </DropdownMenu>
+            </Dropdown>
+          )}
+        </FilterContext.Consumer>
+        <SearchContext.Consumer>
+          {({ onChange }) => (
+            <InputGroup>
+              <Input
+                placeholder="Search"
+                onChange={e => onChange(e.target.value)}
+              />
+            </InputGroup>
+          )}
+        </SearchContext.Consumer>
+      </div>
     );
   }
 }

@@ -5,18 +5,76 @@ import Catalog from "../components/Catalog";
 import Loading from "../components/Loading";
 import Filter from "../components/Filter";
 import Section from "../components/Section";
+import { FilterContext } from "../contexts/filter-context";
+import { SearchContext } from "../contexts/search-context";
 
-const Visas = props => {
-  const { results, categories, filter } = props;
-  return (
-    <Section>
-      {categories && categories.length ? (
-        <Filter categories={categories} filter={filter} />
-      ) : null}
-      {results && results.length ? <Catalog products={results} /> : <Loading />}
-    </Section>
-  );
-};
+class Visas extends React.Component {
+  constructor(props) {
+    super(props);
+    const { results, filter } = props;
+    this.state = {
+      loading: false,
+      filter: filter,
+      results: results,
+      filteredResults: results
+    };
+  }
+
+  changeSearch = search => {
+    const { results } = this.state;
+    if (search == "") {
+      this.setState({ filteredResults: results });
+      return;
+    }
+    const regex = new RegExp(search);
+    const filteredResults = results.filter(result => regex.test(result.title));
+    this.setState({ filteredResults });
+  };
+
+  changeCategory = category => {
+    const filter = { selectedCategory: category };
+    this.setState({ loading: true, filter }, async () => {
+      const FlameLinkStore = await require("../static/js/flamelink-store")
+        .default;
+      const results = await FlameLinkStore.getStore().getContent(
+        "visaSummary",
+        {
+          orderByChild: "category",
+          equalTo: category.name
+        }
+      );
+      this.setState({ results, filteredResults: results }, () =>
+        this.setState({ loading: false })
+      );
+    });
+  };
+
+  render() {
+    const { categories } = this.props;
+    const { filteredResults, filter, loading } = this.state;
+    let display =
+      filteredResults && filteredResults.length ? (
+        <Catalog products={filteredResults} />
+      ) : null;
+    if (loading) {
+      display = <Loading />;
+    }
+    return (
+      <SearchContext.Provider value={{ onChange: this.changeSearch }}>
+        <FilterContext.Provider
+          value={{ onCategoryChange: this.changeCategory }}
+        >
+          <Section>
+            {categories && categories.length ? (
+              <Filter categories={categories} filter={filter} />
+            ) : null}
+            {display}
+          </Section>
+        </FilterContext.Provider>
+      </SearchContext.Provider>
+    );
+  }
+}
 
 Visas.defaultProps = {
   filter: { selectedCategory: { name: "Africa" } }

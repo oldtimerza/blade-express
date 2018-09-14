@@ -25,7 +25,7 @@ const Section = props => {
 Section.propTypes = {
   summary: PropTypes.string,
   childrenStyle: PropTypes.object,
-  children: PropTypes.arrayOf(PropTypes.Component)
+  children: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default Section;
