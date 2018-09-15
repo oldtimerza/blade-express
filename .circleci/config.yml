@@ -5,27 +5,14 @@ jobs:
       - image: circleci/node:7
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn install
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
   test:
     docker:
       - image: circleci/node:7
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn install
@@ -34,12 +21,7 @@ jobs:
           command: ls
       - run:
           name: Deeper
-          command: cd ./node_modules/.bin
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+          command: cd ./node_modules/.bin && ls
   deploy:
     docker:
       - image: circleci/node:7
