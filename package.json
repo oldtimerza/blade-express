@@ -31,7 +31,7 @@
     "build": "next build",
     "start": "npm run build && node server.js",
     "dev": "node server.js",
-    "test": "SET \"NODE_ENV=test\"&& jest",
+    "test": "jest",
     "test:watch": "SET \"NODE_ENV=test\"&& jest --watch",
     "test:coverage": "SET \"NODE_ENV=test\"&& jest --coverage"
   },
