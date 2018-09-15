@@ -47,9 +47,9 @@ workflows:
   build-test-deploy:
     jobs:
       - build
-      - test
-        requires:
-          - build
+      - test:
+          requires:
+            - build
       - deploy:
           requires:
             - test
