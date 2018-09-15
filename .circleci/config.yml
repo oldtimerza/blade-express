@@ -15,7 +15,7 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: yarn install
+          command: yarn install --production=false
       - run:
           name: Check folder
           command: ls
