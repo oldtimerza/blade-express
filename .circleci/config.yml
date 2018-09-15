@@ -17,11 +17,8 @@ jobs:
           name: Install Dependencies
           command: yarn install --production=false
       - run:
-          name: Check folder
-          command: ls
-      - run:
-          name: Deeper
-          command: cd ./node_modules/.bin && ls
+          name: Test
+          command: yarn test
   deploy:
     docker:
       - image: circleci/node:7
