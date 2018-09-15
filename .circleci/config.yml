@@ -30,8 +30,11 @@ jobs:
           name: Install Dependencies
           command: yarn install
       - run:
-          name: Test
-          command: yarn test
+          name: Check folder
+          command: ls
+      - run:
+          name: Deeper
+          command: cd ./node_modules/.bin
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
