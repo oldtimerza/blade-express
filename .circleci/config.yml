@@ -17,6 +17,9 @@ jobs:
           name: Install Dependencies
           command: yarn install --production=false
       - run:
+          name: Show folder contents
+          command: ls && cd ./node_modules && ls
+      - run:
           name: Test
           command: yarn test
   deploy:
