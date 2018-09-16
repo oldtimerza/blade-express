@@ -11,6 +11,7 @@ import {
 
 import { FilterContext } from "../../contexts/filter-context";
 import { SearchContext } from "../../contexts/search-context";
+import css from "./styling.scss";
 
 class Filter extends React.Component {
   constructor(props) {
@@ -33,32 +34,39 @@ class Filter extends React.Component {
       <div>
         <FilterContext.Consumer>
           {({ onCategoryChange }) => (
-            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-              <DropdownToggle caret>
-                {filter.selectedCategory.name}
-              </DropdownToggle>
-              <DropdownMenu>
-                {categories && categories.length
-                  ? categories.map(category => (
-                      <DropdownItem onClick={() => onCategoryChange(category)}>
-                        {category.name}
-                      </DropdownItem>
-                    ))
-                  : null}
-              </DropdownMenu>
-            </Dropdown>
+            <div className={css.inline}>
+              <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <DropdownToggle caret>
+                  {filter.selectedCategory.name}
+                </DropdownToggle>
+                <DropdownMenu>
+                  {categories && categories.length
+                    ? categories.map(category => (
+                        <DropdownItem
+                          onClick={() => onCategoryChange(category)}
+                        >
+                          {category.name}
+                        </DropdownItem>
+                      ))
+                    : null}
+                </DropdownMenu>
+              </Dropdown>
+            </div>
           )}
         </FilterContext.Consumer>
         <SearchContext.Consumer>
           {({ onChange }) => (
-            <InputGroup>
-              <Input
-                placeholder="Search"
-                onChange={e => onChange(e.target.value)}
-              />
-            </InputGroup>
+            <div className={css.inline}>
+              <InputGroup>
+                <Input
+                  placeholder="Search"
+                  onChange={e => onChange(e.target.value)}
+                />
+              </InputGroup>
+            </div>
           )}
         </SearchContext.Consumer>
+        <div className={css.clear} />
       </div>
     );
   }
