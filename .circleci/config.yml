@@ -17,9 +17,6 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          name: Show folder contents
-          command: ls -a
-      - run:
           name: Test
           command: yarn test
   deploy:
