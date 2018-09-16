@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:8
+    environment:
+      NODE_ENV: "test"
     steps:
       - checkout
       - restore_cache:
