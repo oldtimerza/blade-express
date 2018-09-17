@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "22.4.3",
+    "babel-jest": "^23.6.0",
     "enzyme": "3.2.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "jest": "22.0.1",
@@ -32,7 +32,7 @@
     "start": "npm run build && node server.js",
     "dev": "node server.js",
     "test": "jest",
-    "test:watch": "SET \"NODE_ENV=test\"&& jest --watch",
+    "test:watch": "SET \"NODE_ENV=test\"&& jest --config=jest.config.js --watch",
     "test:coverage": "SET \"NODE_ENV=test\"&& jest --coverage"
   },
   "repository": {
