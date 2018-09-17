@@ -1,6 +1,8 @@
+import PropTypes from "prop-types";
+
 import css from "./styling.scss";
 
-export default props => {
+const NavMenu = props => {
   const { menus } = props;
   return (
     <div>
@@ -19,3 +21,13 @@ export default props => {
     </div>
   );
 };
+
+NavMenu.propTypes = {
+  menus: PropTypes.arrayOf(
+    PropTypes.shape({
+      items: PropTypes.arrayOf({ title: PropTypes.string })
+    })
+  )
+};
+
+export default NavMenu;

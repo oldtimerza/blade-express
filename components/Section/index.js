@@ -4,12 +4,6 @@ import PropTypes from "prop-types";
 
 import css from "./styling.scss";
 
-Section.propTypes = {
-  summary: PropTypes.string,
-  childrenStyle: PropTypes.object,
-  children: PropTypes.arrayOf(PropTypes.object)
-};
-
 const Section = props => {
   return (
     <div className={css.spacer}>
@@ -26,6 +20,12 @@ const Section = props => {
       </Container>
     </div>
   );
+};
+
+Section.propTypes = {
+  summary: PropTypes.string,
+  childrenStyle: PropTypes.object,
+  children: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default Section;

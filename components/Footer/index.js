@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Col, Row } from "reactstrap";
+import PropTypes from "prop-types";
 
 import Address from "./Address";
 import ContactInformation from "./ContactInformation";
@@ -35,6 +36,30 @@ const Footer = props => {
       </Container>
     </div>
   );
+};
+
+Footer.propTypes = {
+  details: PropTypes.shape({
+    addressLine1: PropTypes.string,
+    addressLine2: PropTypes.string,
+    city: PropTypes.string,
+    province: PropTypes.string,
+    postalCode: PropTypes.string,
+    telephone: PropTypes.string,
+    fax: PropTypes.string,
+    email: PropTypes.string
+  }),
+  menus: PropTypes.arrayOf(
+    PropTypes.shape({
+      items: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string,
+          url: PropTypes.string,
+          title: PropTypes.string
+        })
+      )
+    })
+  )
 };
 
 export default Footer;

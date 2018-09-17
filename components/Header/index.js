@@ -8,10 +8,25 @@ import {
   NavbarToggler,
   Collapse
 } from "reactstrap";
+import PropTypes from "prop-types";
 
 import css from "./styling.scss";
 
 class Header extends Component {
+  static propTypes = {
+    menus: PropTypes.arrayOf(
+      PropTypes.shape({
+        items: PropTypes.arrayOf(
+          PropTypes.shape({
+            id: PropTypes.string,
+            url: PropTypes.string,
+            title: PropTypes.string
+          })
+        )
+      })
+    )
+  };
+
   constructor(props) {
     super(props);
 

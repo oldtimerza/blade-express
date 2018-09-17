@@ -4,21 +4,6 @@ import { CardDeck, Card } from "reactstrap";
 
 import MediaCard from "./MediaCard";
 
-Cards.defaultProps = {
-  maxNumberOfColumns: 3
-};
-
-Cards.propTypes = {
-  cards: PropTypes.arrayOf(
-    PropTypes.shape({
-      imageUrl: PropTypes.string,
-      title: PropTypes.string,
-      description: PropTypes.string
-    })
-  ),
-  maxNumberOfColumns: PropTypes.number
-};
-
 const Cards = props => {
   const { maxNumberOfColumns, cards } = props;
   const count = cards.length;
@@ -44,6 +29,21 @@ const Cards = props => {
     rows.push(<CardDeck key={i + j * maxNumberOfColumns}>{columns}</CardDeck>);
   }
   return <div>{rows}</div>;
+};
+
+Cards.defaultProps = {
+  maxNumberOfColumns: 3
+};
+
+Cards.propTypes = {
+  cards: PropTypes.arrayOf(
+    PropTypes.shape({
+      imageUrl: PropTypes.string,
+      title: PropTypes.string,
+      description: PropTypes.string
+    })
+  ),
+  maxNumberOfColumns: PropTypes.number
 };
 
 export default Cards;

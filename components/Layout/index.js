@@ -1,6 +1,6 @@
 import React from "react";
-
 import { Container, Row, Col, Alert } from "reactstrap";
+import PropTypes from "prop-types";
 
 import Header from "../Header";
 import Footer from "../Footer";
@@ -22,5 +22,12 @@ const Layout = props => (
     <Footer className={css.footer} details={props.footer} menus={props.menus} />
   </div>
 );
+
+Layout.propTypes = {
+  menus: PropTypes.arrayOf(PropTypes.shape({})),
+  banner: PropTypes.instanceOf(React.Component),
+  children: PropTypes.arrayOf(PropTypes.instanceOf(React.Component)),
+  footer: PropTypes.instanceOf(React.Component)
+};
 
 export default Layout;

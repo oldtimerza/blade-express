@@ -1,6 +1,8 @@
+import PropTypes from "prop-types";
+
 import css from "./styling.scss";
 
-export default props => {
+const Address = props => {
   return (
     <div>
       <p>Address details</p>
@@ -12,3 +14,13 @@ export default props => {
     </div>
   );
 };
+
+Address.propTypes = {
+  addressLine1: PropTypes.string,
+  addressLine2: PropTypes.string,
+  city: PropTypes.string,
+  province: PropTypes.string,
+  postalCode: PropTypes.string
+};
+
+export default Address;

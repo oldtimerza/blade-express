@@ -1,6 +1,8 @@
+import PropTypes from "prop-types";
+
 import css from "./styling.scss";
 
-export default props => {
+const ContactInformation = props => {
   return (
     <div>
       <p>Contact information</p>
@@ -10,3 +12,11 @@ export default props => {
     </div>
   );
 };
+
+ContactInformation.propTypes = {
+  telephone: PropTypes.string,
+  fax: PropTypes.string,
+  email: PropTypes.string
+};
+
+export default ContactInformation;

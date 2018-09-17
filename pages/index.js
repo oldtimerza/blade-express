@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Section from "../components/Section";
 import Cards from "../components/Cards";
@@ -27,6 +28,12 @@ HomePage.getInitialProps = async function({ req }) {
   return {
     results: res
   };
+};
+
+HomePage.propTypes = {
+  results: PropTypes.arrayOf(
+    PropTypes.shape({ infoCardImages: PropTypes.arrayOf(PropTypes.string) })
+  )
 };
 
 export default HomePage;
