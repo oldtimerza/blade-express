@@ -4,7 +4,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
 
-async function setUpNavMenuFromCMS(props, FlameLinkStore) {
+async function setupNavBarFromCMS(props, FlameLinkStore) {
   let navMenu = {};
   navMenu = await FlameLinkStore.getStore().getNavigation("mainNavigation");
   props.navMenu = navMenu;
@@ -14,7 +14,7 @@ function isHome(router) {
   return router.route && router.route === "/";
 }
 
-async function createBannerFromCMS(props, FlameLinkStore) {
+async function setupBannerFromCMS(props, FlameLinkStore) {
   let bannerUrl = "";
   const bannerResults = await FlameLinkStore.getStore().getContent("banner");
   bannerUrl = bannerResults[0].imageDeck[0].imageUrl;
@@ -40,9 +40,9 @@ export default class MyApp extends App {
     }
     allProps.pageProps = pageProps;
 
-    await setUpNavMenuFromCMS(allProps, FlameLinkStore);
+    await setupNavBarFromCMS(allProps, FlameLinkStore);
     if (isHome(router)) {
-      await createBannerFromCMS(allProps, FlameLinkStore);
+      await setupBannerFromCMS(allProps, FlameLinkStore);
     }
     await setupFooterFromCMS(allProps, FlameLinkStore);
     return { allProps };

@@ -54,23 +54,19 @@ class Visas extends React.Component {
   render() {
     const { categories } = this.props;
     const { filteredResults, filter, loading } = this.state;
-    let display =
-      filteredResults && filteredResults.length ? (
-        <Catalog products={filteredResults} />
-      ) : null;
-    if (loading) {
-      display = <Loading />;
-    }
     return (
       <SearchContext.Provider value={{ onChange: this.changeSearch }}>
         <FilterContext.Provider
           value={{ onCategoryChange: this.changeCategory }}
         >
           <Section>
+            {loading ? <Loading /> : null}
             {categories && categories.length ? (
               <Filter categories={categories} filter={filter} />
             ) : null}
-            {display}
+            {filteredResults && filteredResults.length ? (
+              <Catalog products={filteredResults} />
+            ) : null}
           </Section>
         </FilterContext.Provider>
       </SearchContext.Provider>

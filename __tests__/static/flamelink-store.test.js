@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import flamelink from "flamelink";
 
 import FlameLinkStore from "../../static/js/flamelink-store";
 

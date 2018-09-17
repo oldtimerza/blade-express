@@ -1,10 +1,49 @@
 import { shallow, mount } from "enzyme";
-import sinon from "sinon";
 
 import Visas from "../../pages/visas";
 
+jest.mock("flamelink", () => {
+  const sinon = require("sinon");
+  const mockFlameLink = function flamelink(config) {
+    var getContentStub = sinon.stub();
+    getContentStub.withArgs("visaCategory").returns([{ name: "Category" }]);
+    getContentStub
+      .withArgs("visaSummary")
+      .returns([{ title: "title", description: "description" }]);
+    return {
+      content: {
+        get: getContentStub
+      }
+    };
+  };
+  return mockFlameLink;
+});
+
 describe("visas page", () => {
-  it("should render", () => {
+  var wrapper;
+  beforeEach(async () => {
+    const category = "Category";
+    const req = {};
+    const query = { category };
+    const props = await Visas.getInitialProps({ req, query });
+    wrapper = shallow(<Visas {...props} />);
+  });
+
+  it("should get category and results to display in initial props", async () => {
+    const state = wrapper.state();
+    expect(state.results).toEqual([
+      { description: "description", id: "0", title: "title" }
+    ]);
+    expect(state.filteredResults).toEqual([
+      { description: "description", id: "0", title: "title" }
+    ]);
+    expect(state.loading).toEqual(false);
+    expect(state.filter).toEqual({
+      selectedCategory: { id: "0", name: "Category" }
+    });
+  });
+
+  it("should render", async () => {
     const wrapper = shallow(<Visas />);
     expect(wrapper.length).toBe(1);
   });
