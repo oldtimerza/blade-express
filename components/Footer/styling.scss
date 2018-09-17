@@ -11,3 +11,11 @@
 .descriptive_text {
   font-size: $font-size-description;
 }
+
+.verticalMenu {
+  color: $secondary-color;
+}
+
+.verticalMenu:hover {
+  color: $primary-color;
+}

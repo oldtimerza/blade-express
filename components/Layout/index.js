@@ -24,7 +24,13 @@ const Layout = props => (
 );
 
 Layout.propTypes = {
-  menus: PropTypes.arrayOf(PropTypes.shape({})),
+  menus: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      url: PropTypes.string
+    })
+  ),
   banner: PropTypes.instanceOf(React.Component),
   children: PropTypes.arrayOf(PropTypes.instanceOf(React.Component)),
   footer: PropTypes.instanceOf(React.Component)

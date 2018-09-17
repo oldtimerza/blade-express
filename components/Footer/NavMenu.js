@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Link from "next/link";
 
 import css from "./styling.scss";
 
@@ -10,8 +11,10 @@ const NavMenu = props => {
         ? menus.items.map(item => {
             if (item.title) {
               return (
-                <div className="menuItem" key={item.title}>
-                  {item.title}
+                <div>
+                  <Link href={item.url} key={item.title}>
+                    <a className={css.verticalMenu}>{item.title}</a>
+                  </Link>
                 </div>
               );
             }
@@ -25,7 +28,7 @@ const NavMenu = props => {
 NavMenu.propTypes = {
   menus: PropTypes.arrayOf(
     PropTypes.shape({
-      items: PropTypes.arrayOf({ title: PropTypes.string })
+      items: PropTypes.arrayOf({ title: PropTypes.string, url: PropTypes.url })
     })
   )
 };
