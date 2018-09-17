@@ -9,6 +9,21 @@ import { FilterContext } from "../contexts/filter-context";
 import { SearchContext } from "../contexts/search-context";
 
 class Visas extends React.Component {
+  static defaultProps = {
+    results: [],
+    filter: { selectedCategory: { name: "Africa" } }
+  };
+
+  static propTypes = {
+    categories: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string
+      })
+    ),
+    results: PropTypes.arrayOf(PropTypes.object),
+    query: PropTypes.object
+  };
+
   constructor(props) {
     super(props);
     const { results, filter } = props;
@@ -73,21 +88,6 @@ class Visas extends React.Component {
     );
   }
 }
-
-Visas.defaultProps = {
-  results: [],
-  filter: { selectedCategory: { name: "Africa" } }
-};
-
-Visas.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string
-    })
-  ),
-  results: PropTypes.arrayOf(PropTypes.object),
-  query: PropTypes.object
-};
 
 Visas.getInitialProps = async function({ req, query }) {
   const FlameLinkStore = await require("../static/js/flamelink-store").default;

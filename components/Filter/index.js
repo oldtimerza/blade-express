@@ -14,6 +14,21 @@ import { SearchContext } from "../../contexts/search-context";
 import css from "./styling.scss";
 
 class Filter extends React.Component {
+  static defaultProps = {
+    filter: { selectedCategory: "Africa" }
+  };
+
+  static propTypes = {
+    categories: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string
+      })
+    ).isRequired,
+    filter: PropTypes.shape({
+      selectedCategory: PropTypes.shape({ name: PropTypes.string })
+    }).isRequired
+  };
+
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -71,20 +86,5 @@ class Filter extends React.Component {
     );
   }
 }
-
-Filter.defaultProps = {
-  filter: { selectedCategory: "Africa" }
-};
-
-Filter.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string
-    })
-  ).isRequired,
-  filter: PropTypes.shape({
-    selectedCategory: PropTypes.shape({ name: PropTypes.string })
-  }).isRequired
-};
 
 export default Filter;
