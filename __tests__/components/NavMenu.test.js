@@ -11,7 +11,7 @@ describe("<NavMenu/>", () => {
   });
   it("should render the correct number of links", () => {
     const wrapper = mount(<NavMenu menus={menu} />);
-    const menuItems = wrapper.find(".menuItem");
+    const menuItems = wrapper.find("a");
     expect(menuItems.length).toBe(2);
   });
 });

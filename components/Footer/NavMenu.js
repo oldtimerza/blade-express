@@ -28,7 +28,7 @@ const NavMenu = props => {
 NavMenu.propTypes = {
   menus: PropTypes.arrayOf(
     PropTypes.shape({
-      items: PropTypes.arrayOf({ title: PropTypes.string, url: PropTypes.url })
+      items: PropTypes.shape({ title: PropTypes.string, url: PropTypes.url })
     })
   )
 };
