@@ -75,11 +75,11 @@ class Visas extends React.Component {
           value={{ onCategoryChange: this.changeCategory }}
         >
           <Section>
-            {loading ? <Loading /> : null}
             {categories && categories.length ? (
               <Filter categories={categories} filter={filter} />
             ) : null}
-            {filteredResults && filteredResults.length ? (
+            {loading ? <Loading /> : null}
+            {!loading && filteredResults && filteredResults.length ? (
               <Catalog products={filteredResults} />
             ) : null}
           </Section>
