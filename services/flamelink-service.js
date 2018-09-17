@@ -1,7 +1,7 @@
 import flamelink from "flamelink";
 import firebase from "firebase";
 
-var FlameLinkStore = (function() {
+var FlameLinkService = (function() {
   var instance;
 
   function createInstance() {
@@ -56,4 +56,4 @@ var FlameLinkStore = (function() {
   };
 })();
 
-export default FlameLinkStore;
+export default FlameLinkService;

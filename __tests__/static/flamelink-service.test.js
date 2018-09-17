@@ -1,6 +1,6 @@
 import firebase from "firebase";
 
-import FlameLinkStore from "../../static/js/flamelink-store";
+import FlameLinkService from "../../services/flamelink-service";
 
 jest.mock("firebase", () => {
   const sinon = require("sinon");
@@ -26,18 +26,18 @@ jest.mock("flamelink", () => {
   return mockFlameLink;
 });
 
-describe("FlameLinkStore", () => {
+describe("FlameLinkService", () => {
   it("should fetch and clean flamelink CMS schema data", async () => {
-    const flameLinkStore = FlameLinkStore.getStore();
+    const FlameLinkService = FlameLinkService.getStore();
     expect(firebase.initializeApp.called).toBeTruthy();
     try {
-      const content = await flameLinkStore.getContent("testSchema");
+      const content = await FlameLinkService.getContent("testSchema");
       expect(content).toEqual([
         { id: "someId", someData: "data" },
         { id: "someId2", someData: "data" }
       ]);
     } catch (e) {
-      throw new Error("something failed the FlameLinkStore schema test");
+      throw new Error("something failed the FlameLinkService schema test");
     }
   });
 });

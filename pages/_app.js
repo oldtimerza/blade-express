@@ -4,9 +4,9 @@ import React from "react";
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
 
-async function setupNavBarFromCMS(props, FlameLinkStore) {
+async function setupNavBarFromCMS(props, FlameLinkService) {
   let navMenu = {};
-  navMenu = await FlameLinkStore.getStore().getNavigation("mainNavigation");
+  navMenu = await FlameLinkService.getStore().getNavigation("mainNavigation");
   props.navMenu = navMenu;
 }
 
@@ -14,22 +14,22 @@ function isHome(router) {
   return router.route && router.route === "/";
 }
 
-async function setupBannerFromCMS(props, FlameLinkStore) {
+async function setupBannerFromCMS(props, FlameLinkService) {
   let bannerUrl = "";
-  const bannerResults = await FlameLinkStore.getStore().getContent("banner");
+  const bannerResults = await FlameLinkService.getStore().getContent("banner");
   bannerUrl = bannerResults[0].imageDeck[0].imageUrl;
   props.bannerUrl = bannerUrl;
 }
 
-async function setupFooterFromCMS(props, FlameLinkStore) {
+async function setupFooterFromCMS(props, FlameLinkService) {
   let footer = {};
-  footer = await FlameLinkStore.getStore().getContent("footer");
+  footer = await FlameLinkService.getStore().getContent("footer");
   props.footer = footer[0];
 }
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
-    const FlameLinkStore = await require("../static/js/flamelink-store")
+    const FlameLinkService = await require("../services/flamelink-service")
       .default;
 
     let allProps = {};
@@ -40,11 +40,11 @@ export default class MyApp extends App {
     }
     allProps.pageProps = pageProps;
 
-    await setupNavBarFromCMS(allProps, FlameLinkStore);
+    await setupNavBarFromCMS(allProps, FlameLinkService);
     if (isHome(router)) {
-      await setupBannerFromCMS(allProps, FlameLinkStore);
+      await setupBannerFromCMS(allProps, FlameLinkService);
     }
-    await setupFooterFromCMS(allProps, FlameLinkStore);
+    await setupFooterFromCMS(allProps, FlameLinkService);
     return { allProps };
   }
 

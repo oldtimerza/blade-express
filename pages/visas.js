@@ -51,9 +51,9 @@ class Visas extends React.Component {
   changeCategory = category => {
     const filter = { selectedCategory: category };
     this.setState({ loading: true, filter }, async () => {
-      const FlameLinkStore = await require("../static/js/flamelink-store")
+      const FlameLinkService = await require("../services/flamelink-service")
         .default;
-      const results = await FlameLinkStore.getStore().getContent(
+      const results = await FlameLinkService.getStore().getContent(
         "visaSummary",
         {
           orderByChild: "category",
@@ -90,15 +90,18 @@ class Visas extends React.Component {
 }
 
 Visas.getInitialProps = async function({ req, query }) {
-  const FlameLinkStore = await require("../static/js/flamelink-store").default;
-  const categories = await FlameLinkStore.getStore().getContent("visaCategory");
+  const FlameLinkService = await require("../services/flamelink-service")
+    .default;
+  const categories = await FlameLinkService.getStore().getContent(
+    "visaCategory"
+  );
   const matchingCategory = categories.find(
     category => category.name == query.category
   );
   const filter = matchingCategory
     ? { selectedCategory: matchingCategory }
     : { selectedCategory: categories[0] };
-  const results = await FlameLinkStore.getStore().getContent("visaSummary", {
+  const results = await FlameLinkService.getStore().getContent("visaSummary", {
     orderByChild: "category",
     equalTo: filter.selectedCategory.name
   });
