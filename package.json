@@ -32,7 +32,7 @@
     "start": "npm run build && node server.js",
     "dev": "node server.js",
     "test": "jest",
-    "test:watch": "SET \"NODE_ENV=test\"&& jest --config=jest.config.js --watch",
+    "test:nocache": "SET \"NODE_ENV=test\"&& jest --config=jest.config.js --no-cache --watch",
     "test:coverage": "SET \"NODE_ENV=test\"&& jest --coverage"
   },
   "repository": {
