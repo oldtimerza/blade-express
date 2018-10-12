@@ -95,6 +95,9 @@ Visas.getInitialProps = async function({ req, query }) {
   const categories = await FlameLinkService.getStore().getContent(
     "visaCategory"
   );
+  const MoltinService = await require("../services/moltin-service").default;
+  const moltinService = new MoltinService();
+  const products = moltinService.getProducts();
   const matchingCategory = categories.find(
     category => category.name == query.category
   );
