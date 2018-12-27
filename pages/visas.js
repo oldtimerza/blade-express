@@ -97,17 +97,18 @@ Visas.getInitialProps = async function({ req, query }) {
   );
   const MoltinService = await require("../services/moltin-service").default;
   const moltinService = new MoltinService();
-  const products = moltinService.getProducts();
+  const products = await moltinService.getProducts();
   const matchingCategory = categories.find(
     category => category.name == query.category
   );
   const filter = matchingCategory
     ? { selectedCategory: matchingCategory }
     : { selectedCategory: categories[0] };
-  const results = await FlameLinkService.getStore().getContent("visaSummary", {
-    orderByChild: "category",
-    equalTo: filter.selectedCategory.name
-  });
+  const results = products.data.map(product => ({
+    imageUrl: product.imageurl,
+    title: product.name,
+    cost: product.price.amount
+  }));
   return {
     categories,
     results,

@@ -22,7 +22,7 @@ Catalog.propTypes = {
     PropTypes.shape({
       imageUrl: PropTypes.string,
       title: PropTypes.string,
-      description: PropTypes.string
+      cost: PropTypes.string
     })
   )
 };
