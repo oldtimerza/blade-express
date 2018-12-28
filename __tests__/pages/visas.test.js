@@ -2,10 +2,6 @@ import { shallow, mount } from "enzyme";
 
 import Visas from "../../pages/visas";
 
-jest.mock("../../services/moltin-service", () => {
-  return;
-});
-
 describe("visas page", () => {
   var wrapper;
   beforeEach(async () => {
