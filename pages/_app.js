@@ -3,6 +3,8 @@ import React from "react";
 
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
+import CartManager from "../components/Cart/cart-manager";
+import { MoltinContext } from "../contexts/moltin-context";
 
 async function setupNavBarFromCMS(props, FlameLinkService) {
   let navMenu = {};
@@ -52,13 +54,17 @@ export default class MyApp extends App {
     const { Component, allProps, router } = this.props;
     if (isHome(router)) {
       return (
-        <Layout
-          menus={allProps.navMenu}
-          footer={allProps.footer}
-          banner={<Banner imageUrl={allProps.bannerUrl} />}
-        >
-          <Component {...allProps.pageProps} />
-        </Layout>
+        <MoltinContext.Provider>
+          <CartManager>
+            <Layout
+              menus={allProps.navMenu}
+              footer={allProps.footer}
+              banner={<Banner imageUrl={allProps.bannerUrl} />}
+            >
+              <Component {...allProps.pageProps} />
+            </Layout>
+          </CartManager>
+        </MoltinContext.Provider>
       );
     }
     return (

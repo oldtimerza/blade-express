@@ -21,6 +21,7 @@ const MoltinService = function() {
     }
     return Moltin.Products.All();
   };
+
   service.getCategories = () => Moltin.Categories.All();
 
   return service;
