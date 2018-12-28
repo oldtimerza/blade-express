@@ -7,7 +7,6 @@ import Filter from "../components/Filter";
 import Section from "../components/Section";
 import { FilterContext } from "../contexts/filter-context";
 import { SearchContext } from "../contexts/search-context";
-import { MoltinContext } from "../contexts/moltin-context";
 
 class Visas extends React.Component {
   static defaultProps = {
@@ -49,12 +48,10 @@ class Visas extends React.Component {
     this.setState({ filteredResults });
   };
 
-  changeCategory = moltinService => category => {
+  changeCategory = category => {
     const filter = { selectedCategory: category };
     this.setState({ loading: true, filter }, async () => {
-      const MoltinService = await require("../services/moltin-service").default;
-      const moltinService = new MoltinService();
-      const products = await moltinService.getProducts({
+      const products = await this.props.moltinService.getProducts({
         filter: { category: filter.selectedCategory }
       });
       const results = products.data.map(product => ({
@@ -72,32 +69,26 @@ class Visas extends React.Component {
     const { categories } = this.props;
     const { filteredResults, filter, loading } = this.state;
     return (
-      <MoltinContext.Consumer>
-        {({ moltinService }) => (
-          <SearchContext.Provider value={{ onChange: this.changeSearch }}>
-            <FilterContext.Provider
-              value={{ onCategoryChange: this.changeCategory(moltinService) }}
-            >
-              <Section>
-                {categories && categories.length ? (
-                  <Filter categories={categories} filter={filter} />
-                ) : null}
-                {loading ? <Loading /> : null}
-                {!loading && filteredResults && filteredResults.length ? (
-                  <Catalog products={filteredResults} />
-                ) : null}
-              </Section>
-            </FilterContext.Provider>
-          </SearchContext.Provider>
-        )}
-      </MoltinContext.Consumer>
+      <SearchContext.Provider value={{ onChange: this.changeSearch }}>
+        <FilterContext.Provider
+          value={{ onCategoryChange: this.changeCategory }}
+        >
+          <Section>
+            {categories && categories.length ? (
+              <Filter categories={categories} filter={filter} />
+            ) : null}
+            {loading ? <Loading /> : null}
+            {!loading && filteredResults && filteredResults.length ? (
+              <Catalog products={filteredResults} />
+            ) : null}
+          </Section>
+        </FilterContext.Provider>
+      </SearchContext.Provider>
     );
   }
 }
 
-Visas.getInitialProps = async function({ req, query }) {
-  const MoltinService = await require("../services/moltin-service").default;
-  const moltinService = new MoltinService();
+Visas.getInitialProps = async function({ req, query, moltinService }) {
   const categories = await moltinService.getCategories();
   const filter = { selectedCategory: categories.data[0] };
   const products = await moltinService.getProducts({

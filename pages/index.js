@@ -30,13 +30,11 @@ const HomePage = props => {
   );
 };
 
-HomePage.getInitialProps = async function({ req }) {
-  const FlameLinkService = await require("../services/flamelink-service")
-    .default;
-  const res = await FlameLinkService.getStore().getContent("homePage");
-  const popularVisas = await FlameLinkService.getStore().getContent(
-    "popularVisas"
-  );
+HomePage.getInitialProps = async function({ req, flameLinkService }) {
+  const res = await flameLinkService.getStore().getContent("homePage");
+  const popularVisas = await flameLinkService
+    .getStore()
+    .getContent("popularVisas");
   return {
     results: res,
     popularVisas
