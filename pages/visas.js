@@ -7,6 +7,7 @@ import Filter from "../components/Filter";
 import Section from "../components/Section";
 import { FilterContext } from "../contexts/filter-context";
 import { SearchContext } from "../contexts/search-context";
+import MoltinService from "../services/moltin-service";
 
 class Visas extends React.Component {
   static defaultProps = {
@@ -50,8 +51,9 @@ class Visas extends React.Component {
 
   changeCategory = category => {
     const filter = { selectedCategory: category };
+    const moltinService = new MoltinService();
     this.setState({ loading: true, filter }, async () => {
-      const products = await this.props.moltinService.getProducts({
+      const products = await moltinService.getProducts({
         filter: { category: filter.selectedCategory }
       });
       const results = products.data.map(product => ({
@@ -99,11 +101,12 @@ Visas.getInitialProps = async function({ req, query, moltinService }) {
     title: product.name,
     cost: product.price.amount
   }));
-  return {
+  const props = {
     categories: categories.data,
     results,
     filter
   };
+  return props;
 };
 
 export default Visas;

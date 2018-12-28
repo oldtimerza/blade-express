@@ -4,6 +4,8 @@ import React from "react";
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
 import CartManager from "../components/Cart/cart-manager";
+import MoltinService from "../services/moltin-service";
+import FlameLinkService from "../services/flamelink-service";
 
 async function setupNavBarFromCMS(props, FlameLinkService) {
   let navMenu = {};
@@ -30,17 +32,10 @@ async function setupFooterFromCMS(props, FlameLinkService) {
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
-    const FlameLinkService = await require("../services/flamelink-service")
-      .default;
-    const MoltinService = await require("../services/moltin-service").default;
     const moltinService = new MoltinService();
 
     let allProps = {};
     let pageProps = {};
-
-    //add services to client props
-    pageProps.moltinService = moltinService;
-    pageProps.flameLinkService = FlameLinkService;
 
     //add services to server context
     ctx.moltinService = moltinService;
@@ -49,7 +44,6 @@ export default class MyApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-
     allProps.pageProps = pageProps;
 
     await setupNavBarFromCMS(allProps, FlameLinkService);
