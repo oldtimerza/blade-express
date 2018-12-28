@@ -7,12 +7,12 @@ const MoltinService = function() {
     client_id: "1Wyg3FTGdak6iauQ0peifyjGgmgkO3XPjL3AvImSiD"
   });
 
-  service.getProducts = ({ filter }) => {
-    if (filter && filter.category) {
+  service.getProducts = options => {
+    if (options && options.filter && options.filter.category) {
       return Moltin.Products.Filter({
         eq: {
           category: {
-            id: filter.category.id
+            id: options.filter.category.id
           }
         }
       })
