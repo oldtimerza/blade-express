@@ -2,10 +2,11 @@ import { shallow, mount } from "enzyme";
 
 import HomePage from "../../pages/";
 import MediaCard from "../../components/Cards/MediaCard";
+import sinon from "sinon";
 
-jest.mock("flamelink", () => {
-  const sinon = require("sinon");
-  const mockFlameLink = function flamelink(config) {
+describe("index page", () => {
+  var wrapper, props;
+  beforeEach(async () => {
     var getContentStub = sinon.stub();
     getContentStub
       .withArgs("homePage")
@@ -17,20 +18,16 @@ jest.mock("flamelink", () => {
         { imageUrl: "image2", title: "second", description: "description2" },
         { imageUrl: "image3", title: "third", description: "description3" }
       ]);
-    return {
-      content: {
-        get: getContentStub
+    const flameLinkService = {
+      getStore: () => {
+        return {
+          getContent: getContentStub
+        };
       }
     };
-  };
-  return mockFlameLink;
-});
-
-describe("index page", () => {
-  var wrapper, props;
-  beforeEach(async () => {
     const req = {};
-    props = await HomePage.getInitialProps({ req });
+    props = await HomePage.getInitialProps({ req, flameLinkService });
+    props.flameLinkService = flameLinkService;
     wrapper = shallow(<HomePage {...props} />);
   });
 

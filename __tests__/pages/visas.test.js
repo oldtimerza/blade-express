@@ -3,9 +3,18 @@ import { shallow, mount } from "enzyme";
 import Visas from "../../pages/visas";
 
 jest.mock("../../services/moltin-service", () => {
-  return {
-    default: function() {
-      this.getCategories = () => {
+  return;
+});
+
+describe("visas page", () => {
+  var wrapper;
+  beforeEach(async () => {
+    jest.resetModules();
+    const category = "Category";
+    const req = {};
+    const query = { category };
+    const moltinService = {
+      getCategories: () => {
         return {
           data: [
             {
@@ -14,8 +23,8 @@ jest.mock("../../services/moltin-service", () => {
             }
           ]
         };
-      };
-      this.getProducts = () => {
+      },
+      getProducts: () => {
         return {
           data: [
             {
@@ -27,19 +36,11 @@ jest.mock("../../services/moltin-service", () => {
             }
           ]
         };
-      };
-    }
-  };
-});
+      }
+    };
 
-describe("visas page", () => {
-  var wrapper;
-  beforeEach(async () => {
-    jest.resetModules();
-    const category = "Category";
-    const req = {};
-    const query = { category };
-    const props = await Visas.getInitialProps({ req, query });
+    const props = await Visas.getInitialProps({ req, query, moltinService });
+    props.moltinService = moltinService;
     wrapper = shallow(<Visas {...props} />);
   });
 
