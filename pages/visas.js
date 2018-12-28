@@ -51,15 +51,16 @@ class Visas extends React.Component {
   changeCategory = category => {
     const filter = { selectedCategory: category };
     this.setState({ loading: true, filter }, async () => {
-      const FlameLinkService = await require("../services/flamelink-service")
-        .default;
-      const results = await FlameLinkService.getStore().getContent(
-        "visaSummary",
-        {
-          orderByChild: "category",
-          equalTo: category.name
-        }
-      );
+      const MoltinService = await require("../services/moltin-service").default;
+      const moltinService = new MoltinService();
+      const products = await moltinService.getProducts({
+        filter: { category: filter.selectedCategory }
+      });
+      const results = products.data.map(product => ({
+        imageUrl: product.imageurl,
+        title: product.name,
+        cost: product.price.amount
+      }));
       this.setState({ results, filteredResults: results }, () =>
         this.setState({ loading: false })
       );
@@ -90,27 +91,21 @@ class Visas extends React.Component {
 }
 
 Visas.getInitialProps = async function({ req, query }) {
-  const FlameLinkService = await require("../services/flamelink-service")
-    .default;
-  const categories = await FlameLinkService.getStore().getContent(
-    "visaCategory"
-  );
   const MoltinService = await require("../services/moltin-service").default;
   const moltinService = new MoltinService();
-  const products = await moltinService.getProducts();
-  const matchingCategory = categories.find(
-    category => category.name == query.category
-  );
-  const filter = matchingCategory
-    ? { selectedCategory: matchingCategory }
-    : { selectedCategory: categories[0] };
+  console.log({ moltinService });
+  const categories = await moltinService.getCategories();
+  const filter = { selectedCategory: categories.data[0] };
+  const products = await moltinService.getProducts({
+    filter: { category: filter.selectedCategory }
+  });
   const results = products.data.map(product => ({
     imageUrl: product.imageurl,
     title: product.name,
     cost: product.price.amount
   }));
   return {
-    categories,
+    categories: categories.data,
     results,
     filter
   };

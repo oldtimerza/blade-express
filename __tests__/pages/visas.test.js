@@ -2,26 +2,40 @@ import { shallow, mount } from "enzyme";
 
 import Visas from "../../pages/visas";
 
-jest.mock("flamelink", () => {
-  const sinon = require("sinon");
-  const mockFlameLink = function flamelink(config) {
-    var getContentStub = sinon.stub();
-    getContentStub.withArgs("visaCategory").returns([{ name: "Category" }]);
-    getContentStub
-      .withArgs("visaSummary")
-      .returns([{ title: "title", description: "description" }]);
-    return {
-      content: {
-        get: getContentStub
-      }
-    };
+jest.mock("../../services/moltin-service", () => {
+  return {
+    default: function() {
+      this.getCategories = () => {
+        return {
+          data: [
+            {
+              id: "someID",
+              name: "category"
+            }
+          ]
+        };
+      };
+      this.getProducts = () => {
+        return {
+          data: [
+            {
+              imageurl: "imageUrl",
+              name: "product",
+              price: {
+                amount: "1234"
+              }
+            }
+          ]
+        };
+      };
+    }
   };
-  return mockFlameLink;
 });
 
 describe("visas page", () => {
   var wrapper;
   beforeEach(async () => {
+    jest.resetModules();
     const category = "Category";
     const req = {};
     const query = { category };
@@ -32,14 +46,14 @@ describe("visas page", () => {
   it("should get category and results to display in initial props", async () => {
     const state = wrapper.state();
     expect(state.results).toEqual([
-      { description: "description", id: "0", title: "title" }
+      { title: "product", imageUrl: "imageUrl", title: "product", cost: "1234" }
     ]);
     expect(state.filteredResults).toEqual([
-      { description: "description", id: "0", title: "title" }
+      { title: "product", imageUrl: "imageUrl", title: "product", cost: "1234" }
     ]);
     expect(state.loading).toEqual(false);
     expect(state.filter).toEqual({
-      selectedCategory: { id: "0", name: "Category" }
+      selectedCategory: { id: "someID", name: "category" }
     });
   });
 

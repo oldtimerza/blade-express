@@ -4,10 +4,24 @@ const MoltinService = function() {
   var service = {};
 
   const Moltin = MoltinGateway({
-    client_id: process.env.MOLTIN_CLIENT_ID
+    client_id: "1Wyg3FTGdak6iauQ0peifyjGgmgkO3XPjL3AvImSiD"
   });
 
-  service.getProducts = () => Moltin.Products.All();
+  service.getProducts = ({ filter }) => {
+    if (filter && filter.category) {
+      return Moltin.Products.Filter({
+        eq: {
+          category: {
+            id: filter.category.id
+          }
+        }
+      })
+        .With(["category"])
+        .All();
+    }
+    return Moltin.Products.All();
+  };
+  service.getCategories = () => Moltin.Categories.All();
 
   return service;
 };
