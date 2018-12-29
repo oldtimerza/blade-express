@@ -1,10 +1,8 @@
 import flamelink from "flamelink";
 import firebase from "firebase";
 
-var FlameLinkService = {};
-
-FlameLinkService.connectStore = function() {
-  var store = new Object();
+const FlameLinkService = function() {
+  var service = {};
 
   const config = {
     apiKey: "AIzaSyCF-1BA9qhl4SR4U8Iut-yUCy3yioFQ5MA",
@@ -17,9 +15,10 @@ FlameLinkService.connectStore = function() {
   const firebaseApp = firebase.apps.length
     ? firebase.app()
     : firebase.initializeApp(config);
-  store.app = flamelink({ firebaseApp });
 
-  store.getContent = async function(contentName, options) {
+  service.app = flamelink({ firebaseApp });
+
+  service.getContent = async function(contentName, options) {
     let content = {};
     if (options) {
       content = await this.app.content.get(contentName, options);
@@ -36,19 +35,15 @@ FlameLinkService.connectStore = function() {
     return results;
   };
 
-  store.getUrl = async function(mediaReference) {
+  service.getUrl = async function(mediaReference) {
     return this.app.storage.getURL(mediaReference);
   };
 
-  store.getNavigation = async function(navigationName) {
+  service.getNavigation = async function(navigationName) {
     return this.app.nav.get(navigationName);
   };
 
-  return store;
-};
-
-FlameLinkService.getStore = function() {
-  return FlameLinkService.connectStore();
+  return service;
 };
 
 export default FlameLinkService;

@@ -30,10 +30,8 @@ const HomePage = props => {
 };
 
 HomePage.getInitialProps = async function({ req, flameLinkService }) {
-  const res = await flameLinkService.getStore().getContent("homePage");
-  const popularVisas = await flameLinkService
-    .getStore()
-    .getContent("popularVisas");
+  const res = await flameLinkService.getContent("homePage");
+  const popularVisas = await flameLinkService.getContent("popularVisas");
   return {
     results: res,
     popularVisas
