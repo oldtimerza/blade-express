@@ -14,7 +14,6 @@ const HomePage = props => {
   }
   if (props && props.popularVisas) {
     const { popularVisas } = props;
-    console.log(popularVisas);
     popularVisasComponent = <Cards cards={popularVisas} />;
   }
   return (

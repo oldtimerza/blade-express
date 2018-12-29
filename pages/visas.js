@@ -7,14 +7,8 @@ import Filter from "../components/Filter";
 import Section from "../components/Section";
 import { FilterContext } from "../contexts/filter-context";
 import { SearchContext } from "../contexts/search-context";
-import MoltinService from "../services/moltin-service";
 
 class Visas extends React.Component {
-  static defaultProps = {
-    results: [],
-    filter: { selectedCategory: { name: "Africa" } }
-  };
-
   static propTypes = {
     categories: PropTypes.arrayOf(
       PropTypes.shape({
@@ -51,9 +45,8 @@ class Visas extends React.Component {
 
   changeCategory = category => {
     const filter = { selectedCategory: category };
-    const moltinService = new MoltinService();
     this.setState({ loading: true, filter }, async () => {
-      const products = await moltinService.getProducts({
+      const products = await this.props.moltinService.getProducts({
         filter: { category: filter.selectedCategory }
       });
       const results = products.data.map(product => ({

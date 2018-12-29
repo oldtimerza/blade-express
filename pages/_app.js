@@ -1,5 +1,6 @@
 import App from "next/app";
 import React from "react";
+import PropTypes from "prop-types";
 
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
@@ -31,47 +32,66 @@ async function setupFooterFromCMS(props, FlameLinkService) {
 }
 
 export default class MyApp extends App {
+  //inject services into client side
+  static defaultProps = {
+    services: {
+      moltinService: new MoltinService(),
+      flameLinkService: FlameLinkService
+    }
+  };
+
   static async getInitialProps({ Component, router, ctx }) {
+    let startUpProps = {};
+    let initialProps = {};
+
+    //inject services into server side context
     const moltinService = new MoltinService();
-
-    let allProps = {};
-    let pageProps = {};
-
-    //add services to server context
     ctx.moltinService = moltinService;
     ctx.flameLinkService = FlameLinkService;
 
+    //setup the components initialProps
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
+      initialProps = await Component.getInitialProps(ctx);
     }
-    allProps.pageProps = pageProps;
 
-    await setupNavBarFromCMS(allProps, FlameLinkService);
+    //one time setup of global website common props
+    await setupNavBarFromCMS(startUpProps, FlameLinkService);
     if (isHome(router)) {
-      await setupBannerFromCMS(allProps, FlameLinkService);
+      await setupBannerFromCMS(startUpProps, FlameLinkService);
     }
-    await setupFooterFromCMS(allProps, FlameLinkService);
-    return { allProps };
+    await setupFooterFromCMS(startUpProps, FlameLinkService);
+
+    return { startUpProps, initialProps };
   }
 
   render() {
-    const { Component, allProps, router } = this.props;
+    const {
+      Component,
+      startUpProps,
+      initialProps,
+      router,
+      services
+    } = this.props;
+
+    const componentPropsWithServices = { ...initialProps, ...services };
+    const FinalComponent = <Component {...componentPropsWithServices} />;
+
     if (isHome(router)) {
       return (
         <CartManager>
           <Layout
-            menus={allProps.navMenu}
-            footer={allProps.footer}
-            banner={<Banner imageUrl={allProps.bannerUrl} />}
+            menus={startUpProps.navMenu}
+            footer={startUpProps.footer}
+            banner={<Banner imageUrl={startUpProps.bannerUrl} />}
           >
-            <Component {...allProps.pageProps} />
+            {FinalComponent}
           </Layout>
         </CartManager>
       );
     }
     return (
-      <Layout menus={allProps.navMenu} footer={allProps.footer}>
-        <Component {...allProps.pageProps} />
+      <Layout menus={startUpProps.navMenu} footer={startUpProps.footer}>
+        {FinalComponent}
       </Layout>
     );
   }
