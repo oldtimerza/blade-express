@@ -1,10 +1,9 @@
 import App from "next/app";
 import React from "react";
-import PropTypes from "prop-types";
 
+import Main from "../components/Main";
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
-import CartManager from "../components/Cart/cart-manager";
 import MoltinService from "../services/moltin-service";
 import FlameLinkService from "../services/flamelink-service";
 
@@ -79,7 +78,7 @@ export default class MyApp extends App {
 
     if (isHome(router)) {
       return (
-        <CartManager>
+        <Main>
           <Layout
             menus={startUpProps.navMenu}
             footer={startUpProps.footer}
@@ -87,7 +86,7 @@ export default class MyApp extends App {
           >
             {FinalComponent}
           </Layout>
-        </CartManager>
+        </Main>
       );
     }
     return (

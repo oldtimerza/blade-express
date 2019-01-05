@@ -12,6 +12,8 @@
     "firebase": "^5.1.0",
     "flamelink": "^0.17.1",
     "install": "^0.12.1",
+    "js-cookie": "^2.2.0",
+    "lodash": "^4.17.11",
     "next": "latest",
     "node-sass": "^4.9.2",
     "prop-types": "^15.6.2",
