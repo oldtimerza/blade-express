@@ -1,7 +1,8 @@
 import App from "next/app";
 import React from "react";
+import _ from "lodash";
 
-import Main from "../components/Main";
+import CartManager from "../components/Cart/CartManager";
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
 import MoltinService from "../services/moltin-service";
@@ -75,24 +76,26 @@ export default class MyApp extends App {
 
     const componentPropsWithServices = { ...initialProps, ...services };
     const FinalComponent = <Component {...componentPropsWithServices} />;
-
-    if (isHome(router)) {
-      return (
-        <Main>
-          <Layout
-            menus={startUpProps.navMenu}
-            footer={startUpProps.footer}
-            banner={<Banner imageUrl={startUpProps.bannerUrl} />}
-          >
-            {FinalComponent}
-          </Layout>
-        </Main>
-      );
-    }
-    return (
+    var withLayout = (
       <Layout menus={startUpProps.navMenu} footer={startUpProps.footer}>
         {FinalComponent}
       </Layout>
+    );
+    if (isHome(router)) {
+      withLayout = (
+        <Layout
+          menus={startUpProps.navMenu}
+          footer={startUpProps.footer}
+          banner={<Banner imageUrl={startUpProps.bannerUrl} />}
+        >
+          {FinalComponent}
+        </Layout>
+      );
+    }
+    return (
+      <CartManager moltinService={services.moltinService}>
+        {withLayout}
+      </CartManager>
     );
   }
 }

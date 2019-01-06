@@ -52,7 +52,8 @@ class Visas extends React.Component {
       const results = products.data.map(product => ({
         imageUrl: product.imageurl,
         title: product.name,
-        cost: product.price.amount
+        cost: product.price[0].amount,
+        id: product.id
       }));
       this.setState({ results, filteredResults: results }, () =>
         this.setState({ loading: false })
@@ -92,7 +93,8 @@ Visas.getInitialProps = async function({ req, query, moltinService }) {
   const results = products.data.map(product => ({
     imageUrl: product.imageurl,
     title: product.name,
-    cost: product.price.amount
+    cost: product.price[0].amount,
+    id: product.id
   }));
   const props = {
     categories: categories.data,
