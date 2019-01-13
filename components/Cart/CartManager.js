@@ -16,12 +16,12 @@ class CartManager extends Component {
       cartId = guid;
       cookieService.set(CookieConstants.keys.cart_id, guid, { expires: 7 });
     }
-
-    this.props.moltinService.getCart().then(cart =>
-      this.setState({
+    this.props.moltinService.getCart().then(cart => {
+      console.log({ Mount: cart });
+      return this.setState({
         cart: cart.data
-      })
-    );
+      });
+    });
   }
 
   addToCart = cartId => (productId, quantity) => {
@@ -30,6 +30,7 @@ class CartManager extends Component {
       .then(cartItems => {
         const cart = this.state.cart;
         cart.items = cartItems;
+        console.log({ addToCart: cart });
         this.setState({
           cart
         });
