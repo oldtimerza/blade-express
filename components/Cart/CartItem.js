@@ -1,6 +1,8 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
-import { Container, Col, Row } from "reactstrap";
+import { Container, Col, Row, Media } from "reactstrap";
+
+import css from "./styling.scss";
 
 class CartItem extends Component {
   render() {
@@ -10,7 +12,13 @@ class CartItem extends Component {
       <Container>
         <Row>
           <Col>
-            <img src={product.imageUrl} />
+            <Media
+              image
+              left
+              middle
+              className={css.image}
+              src={product.imageUrl}
+            />
           </Col>
           <Col>{product.title}</Col>
           <Col>{product.cost}</Col>

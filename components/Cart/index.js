@@ -3,31 +3,61 @@ import { Container, Col, Row } from "reactstrap";
 
 import CartItem from "./CartItem";
 import css from "./styling.scss";
+import { CartContext } from "../../contexts/cart-context";
 
 class Cart extends Component {
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  setWrapperRef = onOutsideClick => node => {
+    this.wrapperRef = node;
+    this.onOutsideClick = onOutsideClick;
+  };
+
+  handleClickOutside = event => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.onOutsideClick();
+    }
+  };
+
   render() {
     const { cart } = this.props;
-    console.log({ Cart: cart });
     return (
-      <Container>
-        <Row>
-          <Col>
-            <div className={css.cart}>
-              {cart && cart.items
-                ? cart.items.data.map(item => {
-                    const product = {
-                      title: item.name,
-                      imageUrl: item.image.href,
-                      cost: item.meta.display_price.with_tax.unit.formatted,
-                      quantity: item.quantity
-                    };
-                    return <CartItem product={product} />;
-                  })
-                : null}
-            </div>
-          </Col>
-        </Row>
-      </Container>
+      <CartContext.Consumer>
+        {ctx => {
+          if (ctx.visible) {
+            return (
+              <div className={css.cart} ref={this.setWrapperRef(ctx.hide)}>
+                <Container>
+                  <Row>
+                    <Col>
+                      {cart && cart.items
+                        ? cart.items.data.map(item => {
+                            const product = {
+                              title: item.name,
+                              imageUrl: item.image.href,
+                              cost:
+                                item.meta.display_price.with_tax.unit.formatted,
+                              quantity: item.quantity
+                            };
+                            return <CartItem product={product} />;
+                          })
+                        : null}
+                    </Col>
+                  </Row>
+                </Container>
+              </div>
+            );
+          } else {
+            return <div />;
+          }
+        }}
+      </CartContext.Consumer>
     );
   }
 }

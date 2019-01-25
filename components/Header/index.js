@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import css from "./styling.scss";
 import { CartContext } from "../../contexts/cart-context";
 import Cart from "../Cart";
+import Icon from "../Cart/Icon";
 
 class Header extends Component {
   static propTypes = {
@@ -78,6 +79,7 @@ class Header extends Component {
               </Nav>
             </Collapse>
             <Nav>
+              <Icon />
               <Cart cart={ctx.cart} />
             </Nav>
           </Navbar>

@@ -19,7 +19,8 @@ class CartManager extends Component {
     this.props.moltinService.getCart().then(cart => {
       console.log({ Mount: cart });
       return this.setState({
-        cart: cart.data
+        cart: cart.data,
+        visible: false
       });
     });
   }
@@ -32,9 +33,18 @@ class CartManager extends Component {
         cart.items = cartItems;
         console.log({ addToCart: cart });
         this.setState({
-          cart
+          cart,
+          visible: true
         });
       });
+  };
+
+  show = () => {
+    this.setState({ visible: true });
+  };
+
+  hide = () => {
+    this.setState({ visible: false });
   };
 
   render() {
@@ -45,7 +55,10 @@ class CartManager extends Component {
       <CartContext.Provider
         value={{
           cart: this.state.cart,
-          addToCart: this.addToCart(this.state.cart.id)
+          addToCart: this.addToCart(this.state.cart.id),
+          show: this.show,
+          hide: this.hide,
+          visible: this.state.visible
         }}
       >
         {this.props.children}
