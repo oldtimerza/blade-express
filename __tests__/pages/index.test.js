@@ -19,11 +19,7 @@ describe("index page", () => {
         { imageUrl: "image3", title: "third", description: "description3" }
       ]);
     const flameLinkService = {
-      getStore: () => {
-        return {
-          getContent: getContentStub
-        };
-      }
+      getContent: getContentStub
     };
     const req = {};
     props = await HomePage.getInitialProps({ req, flameLinkService });

@@ -26,9 +26,11 @@ describe("visas page", () => {
             {
               imageurl: "imageUrl",
               name: "product",
-              price: {
-                amount: "1234"
-              }
+              price: [
+                {
+                  amount: "1234"
+                }
+              ]
             }
           ]
         };

@@ -31,7 +31,7 @@ jest.mock("flamelink", () => {
 
 describe("FlameLinkService", () => {
   it("should fetch and clean flamelink CMS schema data", async () => {
-    const store = FlameLinkService;
+    const store = FlameLinkService();
     expect(firebase.initializeApp.called).toBeTruthy();
     try {
       const content = await store.getContent("all");
