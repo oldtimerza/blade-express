@@ -9,7 +9,7 @@ class CartItem extends Component {
     const { product } = this.props;
 
     return (
-      <Container>
+      <Container id="cart-item">
         <Row>
           <Col>
             <Media
@@ -20,9 +20,9 @@ class CartItem extends Component {
               src={product.imageUrl}
             />
           </Col>
-          <Col>{product.title}</Col>
-          <Col>{product.cost}</Col>
-          <Col>{product.quantity}</Col>
+          <Col id="title">{product.title}</Col>
+          <Col id="cost">{product.cost}</Col>
+          <Col id="quantity">{product.quantity}</Col>
         </Row>
       </Container>
     );

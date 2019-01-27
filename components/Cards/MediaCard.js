@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Card, CardImg, CardTitle, CardText, CardBody } from "reactstrap";
+import {
+  Card,
+  CardImg,
+  CardTitle,
+  CardText,
+  CardBody,
+  Button
+} from "reactstrap";
 import PropTypes from "prop-types";
 
 import css from "./styling.scss";
@@ -18,6 +25,7 @@ class MediaCard extends Component {
           <CardBody>
             <CardTitle>{this.props.title}</CardTitle>
             <CardText>{this.props.text}</CardText>
+            {this.props.button}
           </CardBody>
         </Card>
       );
@@ -38,7 +46,8 @@ MediaCard.propTypes = {
   imageUrl: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
-  imageClick: PropTypes.func
+  imageClick: PropTypes.func,
+  button: PropTypes.instanceOf(Button)
 };
 
 export default MediaCard;

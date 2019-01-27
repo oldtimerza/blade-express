@@ -8,6 +8,7 @@
     "@zeit/next-css": "^0.2.0",
     "@zeit/next-sass": "^0.2.0",
     "compression": "^1.7.2",
+    "cypress": "^3.1.4",
     "express": "^4.16.3",
     "firebase": "^5.1.0",
     "flamelink": "^0.17.1",
@@ -19,7 +20,8 @@
     "prop-types": "^15.6.2",
     "react": "16.4.1",
     "react-dom": "16.4.1",
-    "reactstrap": "^6.1.0"
+    "reactstrap": "^6.1.0",
+    "start-server-and-test": "^1.7.11"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
@@ -36,7 +38,9 @@
     "dev": "node server.js",
     "test": "jest",
     "test:nocache": "SET \"NODE_ENV=test\"&& jest --config=jest.config.js --no-cache --watch",
-    "test:coverage": "SET \"NODE_ENV=test\"&& jest --coverage"
+    "test:coverage": "SET \"NODE_ENV=test\"&& jest --coverage",
+    "test:cypress": "start-server-and-test dev http://localhost:3000 cypress",
+    "cypress": "set DEBUG=cypress:* && cypress open"
   },
   "repository": {
     "type": "git",

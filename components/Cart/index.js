@@ -32,7 +32,11 @@ class Cart extends Component {
         {ctx => {
           if (ctx.visible) {
             return (
-              <div className={css.cart} ref={this.setWrapperRef(ctx.hide)}>
+              <div
+                id="cart"
+                className={css.cart}
+                ref={this.setWrapperRef(ctx.hide)}
+              >
                 <Container>
                   <Row>
                     <Col>

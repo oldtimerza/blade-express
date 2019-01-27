@@ -1,6 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
-import { CardDeck, Card } from "reactstrap";
+import { CardDeck, Card, Button } from "reactstrap";
 
 import Loading from "../Loading";
 import MediaCard from "../Cards/MediaCard";
@@ -8,12 +8,17 @@ import { CartContext } from "../../contexts/cart-context";
 
 class Catalog extends Component {
   getCard = (product, addToCart) => {
+    const button = (
+      <Button id="add-to-cart" onClick={() => addToCart(product.id, 1)}>
+        Add to cart
+      </Button>
+    );
     return (
       <MediaCard
         imageUrl={product.imageUrl}
         title={product.title}
         text={product.cost}
-        imageClick={() => addToCart(product.id, 1)}
+        button={button}
       />
     );
   };
