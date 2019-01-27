@@ -77,11 +77,10 @@ class Header extends Component {
                     ))
                   : null}
               </Nav>
+              <Nav>
+                <Icon />
+              </Nav>
             </Collapse>
-            <Nav>
-              <Icon />
-              <Cart cart={ctx.cart} />
-            </Nav>
           </Navbar>
         )}
       </CartContext.Consumer>
