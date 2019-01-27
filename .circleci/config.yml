@@ -41,7 +41,6 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - cypress/run
       - deploy:
           requires:
             - build
