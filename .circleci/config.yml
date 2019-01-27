@@ -1,6 +1,4 @@
 version: 2
-orbs:
-  cypress: cypress-io/cypress@1.0.0
 jobs:
   build:
     docker:
@@ -47,7 +45,6 @@ workflows:
       - deploy:
           requires:
             - build
-            - cypress/run
           filters:
             branches:
               only: master
