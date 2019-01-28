@@ -1,0 +1,16 @@
+@import "../../theme.global.scss";
+
+.cardButton {
+  width: 100%;
+  background-color: $confirm-color;
+  border-color: transparent;
+  font-family: $primary-font;
+}
+
+.cardButton:hover {
+  background-color: $confirm-color-hover;
+}
+
+.card {
+  border: 0px;
+}

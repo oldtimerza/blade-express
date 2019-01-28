@@ -21,7 +21,7 @@ function isHome(router) {
 async function setupBannerFromCMS(props, FlameLinkService) {
   let bannerUrl = "";
   const bannerResults = await FlameLinkService.getContent("banner");
-  bannerUrl = bannerResults[0].imageDeck[0].imageUrl;
+  bannerUrl = bannerResults[0].banner[0].imageUrl;
   props.bannerUrl = bannerUrl;
 }
 

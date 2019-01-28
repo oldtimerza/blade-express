@@ -17,7 +17,6 @@ class CartManager extends Component {
       cookieService.set(CookieConstants.keys.cart_id, guid, { expires: 7 });
     }
     this.props.moltinService.getCart().then(cart => {
-      console.log({ Mount: cart });
       return this.setState({
         cart: cart.data,
         visible: false

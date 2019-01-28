@@ -10,7 +10,7 @@ const Cards = props => {
   const remainder = count % maxNumberOfColumns;
   const numberOfRows = (count - remainder) / maxNumberOfColumns;
   let rows = [];
-  for (var j = 0; j < numberOfRows + 1; j++) {
+  for (var j = 0; j < numberOfRows; j++) {
     let columns = [];
     for (var i = 0; i < maxNumberOfColumns; i++) {
       const index = i + j * maxNumberOfColumns;

@@ -8,7 +8,7 @@ import css from "./styling.scss";
 
 const Layout = props => (
   <div>
-    <Alert color="warning">
+    <Alert color="warning" className={css.alert}>
       Please note: This site is in active development and does not currently
       represent it's final state.
     </Alert>

@@ -2,6 +2,7 @@
 
 .card {
   border: 0px;
+  margin-bottom: 10px;
 }
 
 .card:hover {
@@ -9,6 +10,13 @@
 }
 
 .cardImage {
+  min-height: 164px;
+  max-height: 224px;
+}
+
+.cardBody {
+  height: 190px;
+  overflow: hidden;
 }
 
 .cardTitle {
@@ -16,9 +24,14 @@
   text-align: center;
   font-size: $font-size-mid;
   font-family: $primary-font;
+  height: 60px;
+  overflow: hidden;
 }
 
 .cardText {
   font-family: $primary-font;
   font-size: $font-size-minor;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
 }

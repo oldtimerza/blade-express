@@ -12,7 +12,6 @@ import PropTypes from "prop-types";
 
 import css from "./styling.scss";
 import { CartContext } from "../../contexts/cart-context";
-import Cart from "../Cart";
 import Icon from "../Cart/Icon";
 
 class Header extends Component {

@@ -6,10 +6,16 @@ import Loading from "../Loading";
 import MediaCard from "../Cards/MediaCard";
 import { CartContext } from "../../contexts/cart-context";
 
+import css from "./styling.scss";
+
 class Catalog extends Component {
   getCard = (product, addToCart) => {
     const button = (
-      <Button id="add-to-cart" onClick={() => addToCart(product.id, 1)}>
+      <Button
+        className={css.cardButton}
+        id="add-to-cart"
+        onClick={() => addToCart(product.id, 1)}
+      >
         Add to cart
       </Button>
     );
@@ -23,27 +29,28 @@ class Catalog extends Component {
     );
   };
 
-  generateCarts = (products, addToCart) => {
+  generateCards = (products, addToCart) => {
     const { maxNumberOfColumns } = this.props;
     const count = products.length;
     const remainder = count % maxNumberOfColumns;
-    const numberOfRows = (count - remainder) / maxNumberOfColumns;
+    let numberOfRows = (count - remainder) / maxNumberOfColumns;
+    numberOfRows = numberOfRows === 1 ? numberOfRows : numberOfRows + 1;
     let rows = [];
-    for (var j = 0; j < numberOfRows + 1; j++) {
+    for (var j = 0; j < numberOfRows; j++) {
       let columns = [];
       for (var i = 0; i < maxNumberOfColumns; i++) {
         const index = i + j * maxNumberOfColumns;
         if (index < count) {
           columns.push(this.getCard(products[index], addToCart));
         } else {
-          columns.push(<Card />);
+          columns.push(<Card className={css.card} />);
         }
       }
       rows.push(
         <CardDeck key={i + j * maxNumberOfColumns}>{columns}</CardDeck>
       );
-      return rows;
     }
+    return rows;
   };
 
   render() {
@@ -51,7 +58,7 @@ class Catalog extends Component {
     if (products) {
       return (
         <CartContext.Consumer>
-          {ctx => this.generateCarts(products, ctx.addToCart)}
+          {ctx => this.generateCards(products, ctx.addToCart)}
         </CartContext.Consumer>
       );
     }
