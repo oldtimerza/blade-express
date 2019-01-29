@@ -40,18 +40,25 @@ class Cart extends Component {
                 <Container>
                   <Row>
                     <Col>
-                      {cart && cart.items
-                        ? cart.items.data.map(item => {
-                            const product = {
-                              title: item.name,
-                              imageUrl: item.image.href,
-                              cost:
-                                item.meta.display_price.with_tax.unit.formatted,
-                              quantity: item.quantity
-                            };
-                            return <CartItem product={product} />;
-                          })
-                        : null}
+                      {cart && cart.items ? (
+                        cart.items.data.map(item => {
+                          const product = {
+                            title: item.name,
+                            imageUrl: item.image.href,
+                            cost:
+                              item.meta.display_price.with_tax.value.formatted,
+                            quantity: item.quantity
+                          };
+                          return (
+                            <CartItem
+                              product={product}
+                              onRemove={() => ctx.removeFromCart(item.id, 1)}
+                            />
+                          );
+                        })
+                      ) : (
+                        <p> Your cart is empty.</p>
+                      )}
                     </Col>
                   </Row>
                 </Container>

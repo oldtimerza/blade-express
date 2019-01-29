@@ -2,7 +2,7 @@
 
 .cart {
   min-width: 400px;
-  min-height: 300px;
+  min-height: 50px;
   z-index: 10;
   overflow: hidden;
   background-color: white;
@@ -34,4 +34,28 @@
 
 .icon {
   float: right;
+}
+
+.title {
+  width: 200px;
+  height: 72px;
+  overflow: hidden;
+}
+
+.cost {
+  width: 40px;
+}
+
+.quantity {
+  width: 10px;
+}
+
+.remove {
+  vertical-align: middle;
+  width: 50px;
+}
+
+.removeButton {
+  background-color: $primary-color;
+  width: 50px;
 }

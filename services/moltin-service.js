@@ -56,6 +56,10 @@ const MoltinService = function() {
   service.addToCart = (cartId, productId, quantity) =>
     Moltin.Cart(cartId).AddProduct(productId, quantity);
 
+  service.removeFromCart = (cartId, itemId, quantity) => {
+    return Moltin.Cart(cartId).RemoveItem(itemId, quantity);
+  };
+
   return service;
 };
 

@@ -30,7 +30,19 @@ class CartManager extends Component {
       .then(cartItems => {
         const cart = this.state.cart;
         cart.items = cartItems;
-        console.log({ addToCart: cart });
+        this.setState({
+          cart,
+          visible: true
+        });
+      });
+  };
+
+  removeFromCart = cartId => (itemId, quantity) => {
+    this.props.moltinService
+      .removeFromCart(cartId, itemId, quantity)
+      .then(cartItems => {
+        const cart = this.state.cart;
+        cart.items = cartItems;
         this.setState({
           cart,
           visible: true
@@ -55,6 +67,7 @@ class CartManager extends Component {
         value={{
           cart: this.state.cart,
           addToCart: this.addToCart(this.state.cart.id),
+          removeFromCart: this.removeFromCart(this.state.cart.id),
           show: this.show,
           hide: this.hide,
           visible: this.state.visible
