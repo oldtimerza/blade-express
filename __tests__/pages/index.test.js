@@ -1,28 +1,45 @@
 import { shallow, mount } from "enzyme";
+import { Button } from "reactstrap";
 
 import HomePage from "../../pages/";
 import MediaCard from "../../components/Cards/MediaCard";
-import sinon from "sinon";
 
 describe("index page", () => {
   var wrapper, props;
   beforeEach(async () => {
-    var getContentStub = sinon.stub();
-    getContentStub
-      .withArgs("homePage")
-      .returns([{ infoCardImages: ["someImageSource"] }]);
-    getContentStub
-      .withArgs("popularVisas")
-      .returns([
-        { imageUrl: "image1", title: "first", description: "description1" },
-        { imageUrl: "image2", title: "second", description: "description2" },
-        { imageUrl: "image3", title: "third", description: "description3" }
-      ]);
     const flameLinkService = {
-      getContent: getContentStub
+      getContent: () => {
+        return [{ infoCardImages: ["someImageSource"] }];
+      }
+    };
+    const moltinService = {
+      getProducts: () => {
+        return {
+          data: [
+            {
+              imageurl: "imageUrl",
+              name: "product",
+              price: [
+                {
+                  amount: "1234"
+                }
+              ]
+            }
+          ]
+        };
+      },
+      getCollection: () => {
+        return {
+          data: [{ id: "mostPopId" }]
+        };
+      }
     };
     const req = {};
-    props = await HomePage.getInitialProps({ req, flameLinkService });
+    props = await HomePage.getInitialProps({
+      req,
+      flameLinkService,
+      moltinService
+    });
     props.flameLinkService = flameLinkService;
     wrapper = shallow(<HomePage {...props} />);
   });
@@ -34,25 +51,12 @@ describe("index page", () => {
   it("should render with results and popular visas", () => {
     const mountedHomePage = mount(<HomePage {...props} />);
     const mediaCards = mountedHomePage.find(MediaCard);
-    expect(mediaCards.length).toBe(3);
-    expect(mediaCards.at(0).props()).toEqual({
-      imageUrl: "image1",
-      title: "first",
-      text: "description1"
-    });
-    expect(mediaCards.at(1).props()).toEqual({
-      imageUrl: "image2",
-      title: "second",
-      text: "description2"
-    });
-    expect(mediaCards.at(2).props()).toEqual({
-      imageUrl: "image3",
-      title: "third",
-      text: "description3"
-    });
-  });
-
-  it("should render the 3 most popular visas", () => {
-    const mountedHomePage = mount(<HomePage {...props} />);
+    const button = mountedHomePage.find(Button);
+    console.log({ buttons: button.at(0).debug() });
+    expect(mediaCards.length).toBe(1);
+    expect(mediaCards.at(0).props().imageUrl).toEqual("imageUrl");
+    expect(mediaCards.at(0).props().title).toEqual("product");
+    expect(mediaCards.at(0).props().text).toEqual("1234");
+    expect(button.length).toEqual(1);
   });
 });

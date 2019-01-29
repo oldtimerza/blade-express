@@ -8,18 +8,45 @@ const MoltinService = function() {
   });
 
   service.getProducts = options => {
-    if (options && options.filter && options.filter.category) {
-      return Moltin.Products.Filter({
-        eq: {
-          category: {
-            id: options.filter.category.id
+    if (options && options.filter) {
+      if (options.filter.category) {
+        return Moltin.Products.Filter({
+          eq: {
+            category: {
+              id: options.filter.category.id
+            }
           }
-        }
-      })
-        .With(["category"])
-        .All();
+        })
+          .With(["category"])
+          .All();
+      }
+
+      if (options.filter.collection) {
+        return Moltin.Products.Filter({
+          eq: {
+            collection: {
+              id: options.filter.collection.id
+            }
+          }
+        })
+          .With(["collection"])
+          .All();
+      }
     }
     return Moltin.Products.All();
+  };
+
+  service.getCollection = slug => {
+    if (slug) {
+      return Moltin.Collections.Filter({
+        eq: {
+          slug: slug
+        }
+      })
+        .With(["slug"])
+        .All();
+    }
+    return {};
   };
 
   service.getCategories = () => Moltin.Categories.All();
