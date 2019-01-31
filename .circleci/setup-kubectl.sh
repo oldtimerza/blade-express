@@ -1,2 +1,1 @@
-sudo apt-get install -y apt-transport-https
-sudo apt-get install kubectl
+sudo apt-get install -y kubectl
