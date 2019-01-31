@@ -24,13 +24,6 @@ jobs:
       - image: circleci/node:8
     steps:
       - checkout
-      - setup_remote_docker
-      #- run:
-      #    name: Deploy image to Docker Hub
-      #    command: |
-      #      docker build --build-arg DOCKER_USER=$DOCKER_USER --build-arg DOCKER_PASSWORD=$DOCKER_PASSWORD -t oldtimerza/blade-express .
-      #      docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      #      docker push oldtimerza/blade-express
       - run:
           name: Set access to setup-kubectl.sh
           command: |
