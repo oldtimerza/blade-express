@@ -25,22 +25,26 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      #- run:
+      #    name: Deploy image to Docker Hub
+      #    command: |
+      #      docker build --build-arg DOCKER_USER=$DOCKER_USER --build-arg DOCKER_PASSWORD=$DOCKER_PASSWORD -t oldtimerza/blade-express .
+      #      docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      #      docker push oldtimerza/blade-express
       - run:
-          name: Deploy image to Docker Hub
+          name: Set access to setup-kubectl.sh
           command: |
-            docker build --build-arg DOCKER_USER=$DOCKER_USER --build-arg DOCKER_PASSWORD=$DOCKER_PASSWORD -t oldtimerza/blade-express .
-            docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-            docker push oldtimerza/blade-express
+            chmod +x ./.circleci/setup-kubectl.sh
       - run:
           name: Install kubectl
           command: |
-            sudo apt-get update -y && sudo apt-get install -y kubectl
+          ./.circleci/setup-kubectl.sh
       - run:
-          name: Set access to deploy.sh
+          name: Set access to kubernetes.sh
           command: |
-            chmod +x ./.circleci/deploy.sh
+            chmod +x ./.circleci/kubernetes.sh
       - run:
-          name: Run docker image on Digital Ocean Droplet
+          name: Run kubectl deployment and service setup
           command: |
             ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'bash -s' < ./.circleci/kubernetes.sh
 
