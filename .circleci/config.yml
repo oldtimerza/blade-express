@@ -21,7 +21,7 @@ jobs:
           command: yarn test
   deploy:
     docker:
-      - image: circleci/node:7
+      - image: circleci/node:8
     steps:
       - checkout
       - setup_remote_docker
@@ -32,13 +32,17 @@ jobs:
             docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push oldtimerza/blade-express
       - run:
+          name: Install kubectl
+          command: |
+            sudo apt-get update -y && sudo apt-get install -y kubectl
+      - run:
           name: Set access to deploy.sh
           command: |
             chmod +x ./.circleci/deploy.sh
       - run:
           name: Run docker image on Digital Ocean Droplet
           command: |
-            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'bash -s' < ./.circleci/deploy.sh
+            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'bash -s' < ./.circleci/kubernetes.sh
 
 workflows:
   version: 2
@@ -50,4 +54,4 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: kubernetes
