@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Setup kubectl
           command: |
-            ./.circleci/setup-kubectl.sh
+            sudo apt-get update && sudo apt-get install kubectl
       - run:
           name: Set access to kubernetes.sh
           command: |
