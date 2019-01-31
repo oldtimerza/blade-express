@@ -33,7 +33,7 @@ jobs:
           command: |
             sudo apt-get update && \
             sudo apt-get install -y apt-transport-https && \
-            curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+            sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
             sudo apt-get install -y kubelet kubeadm kubectl
       - run:
           name: Set access to kubernetes.sh
