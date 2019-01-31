@@ -29,7 +29,7 @@ jobs:
           command: |
             chmod +x ./.circleci/setup-kubectl.sh
       - run:
-          name: Install kubectl
+          name: Setup kubectl
           command: |
             ./.circleci/setup-kubectl.sh
       - run:
