@@ -5,96 +5,57 @@ import _ from "lodash";
 import CartManager from "../components/Cart/CartManager";
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
-import MoltinService from "../services/moltin-service";
-import FlameLinkService from "../services/flamelink-service";
-
-async function setupNavBarFromCMS(props, FlameLinkService) {
-  let navMenu = {};
-  navMenu = await FlameLinkService.getNavigation("mainNavigation");
-  props.navMenu = navMenu;
-}
+import services from "../services";
 
 function isHome(router) {
   return router.route && router.route === "/";
 }
 
-async function setupBannerFromCMS(props, FlameLinkService) {
-  let bannerUrl = "";
-  const bannerResults = await FlameLinkService.getContent("banner");
-  bannerUrl = bannerResults[0].banner[0].imageUrl;
-  props.bannerUrl = bannerUrl;
-}
-
-async function setupFooterFromCMS(props, FlameLinkService) {
-  let footer = {};
-  footer = await FlameLinkService.getContent("footer");
-  props.footer = footer[0];
-}
-
 export default class MyApp extends App {
-  //inject services into client side
-  static defaultProps = {
-    services: {
-      moltinService: new MoltinService(),
-      flameLinkService: new FlameLinkService()
-    }
-  };
-
   static async getInitialProps({ Component, router, ctx }) {
-    let startUpProps = {};
-    let initialProps = {};
-
-    //inject services into server side context
-    const moltinService = new MoltinService();
-    const flameLinkService = new FlameLinkService();
-    ctx.moltinService = moltinService;
-    ctx.flameLinkService = flameLinkService;
-
     //setup the components initialProps
+    let initialProps = {};
     if (Component.getInitialProps) {
-      initialProps = await Component.getInitialProps(ctx);
+      initialProps = await Component.getInitialProps({ ...ctx, ...services });
     }
 
     //one time setup of global website common props
-    await setupNavBarFromCMS(startUpProps, flameLinkService);
+    const footerData = await services.flameLinkService.getContent("footer");
+    const navMenu = await services.flameLinkService.getNavigation(
+      "mainNavigation"
+    );
+    const startUpProps = {
+      navMenu,
+      footer: footerData[0]
+    };
     if (isHome(router)) {
-      await setupBannerFromCMS(startUpProps, flameLinkService);
+      let bannerUrl = "";
+      const bannerResults = await services.flameLinkService.getContent(
+        "banner"
+      );
+      bannerUrl = bannerResults[0].banner[0].imageUrl;
+      startUpProps.bannerUrl = bannerUrl;
     }
-    await setupFooterFromCMS(startUpProps, flameLinkService);
 
     return { startUpProps, initialProps };
   }
 
   render() {
-    const {
-      Component,
-      startUpProps,
-      initialProps,
-      router,
-      services
-    } = this.props;
+    const { Component, startUpProps, initialProps, router } = this.props;
 
-    const componentPropsWithServices = { ...initialProps, ...services };
-    const FinalComponent = <Component {...componentPropsWithServices} />;
-    var withLayout = (
-      <Layout menus={startUpProps.navMenu} footer={startUpProps.footer}>
-        {FinalComponent}
-      </Layout>
-    );
-    if (isHome(router)) {
-      withLayout = (
+    return (
+      <CartManager moltinService={services.moltinService}>
         <Layout
           menus={startUpProps.navMenu}
           footer={startUpProps.footer}
-          banner={<Banner imageUrl={startUpProps.bannerUrl} />}
+          banner={
+            startUpProps.bannerUrl ? (
+              <Banner imageUrl={startUpProps.bannerUrl} />
+            ) : null
+          }
         >
-          {FinalComponent}
+          <Component {...initialProps} {...services} />
         </Layout>
-      );
-    }
-    return (
-      <CartManager moltinService={services.moltinService}>
-        {withLayout}
       </CartManager>
     );
   }
