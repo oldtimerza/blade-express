@@ -1,6 +1,5 @@
 import App from "next/app";
 import React from "react";
-import _ from "lodash";
 
 import CartManager from "../components/Cart/CartManager";
 import Layout from "../components/Layout";
