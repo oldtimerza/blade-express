@@ -10,4 +10,4 @@ spec:
       targetPort: 3000
       name: http
   selector:
-    - app: "blade-express"
+    app: "blade-express"
