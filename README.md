@@ -25,3 +25,6 @@ https://cloud.docker.com/u/oldtimerza/repository/list
 
 Digital Ocean:
 https://cloud.digitalocean.com/droplets?i=e404cf
+
+DNS:
+https://clientzone.afrihost.com/en/login
