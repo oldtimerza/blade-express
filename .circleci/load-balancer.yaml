@@ -4,6 +4,7 @@ metadata:
   name: blade-express
 spec:
   type: LoadBalancer
+  loadBalancerIP: 67.207.79.245
   ports:
     - protocol: TCP
       port: 80
