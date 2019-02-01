@@ -15,3 +15,5 @@ spec:
       containers:
         - name: blade-express
           image: oldtimerza/blade-express
+          ports:
+            - containerPort: 3000
