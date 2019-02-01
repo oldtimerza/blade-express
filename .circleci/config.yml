@@ -51,4 +51,4 @@ workflows:
             - build
           filters:
             branches:
-              only: kubernetes
+              only: master
