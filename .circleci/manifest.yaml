@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blade-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blade-express
+  template:
+    metadata:
+      labels:
+        app: blade-express
+    spec:
+      containers:
+        - name: blade-express
+          image: oldtimerza/blade-express
