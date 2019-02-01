@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Run kubectl deployment and service setup
           command: |
-            ssh $SSH_USER@$SSH_HOST -o StrictHostKeyChecking=no 'bash -s' < ./.circleci/kubernetes.sh
+            ./.circleci/kubernetes.sh
 
 workflows:
   version: 2
