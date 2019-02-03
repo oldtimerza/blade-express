@@ -9,7 +9,7 @@ class CartItem extends Component {
     const { product, onRemove } = this.props;
     const removeButton = (
       <Button onClick={() => onRemove()} className={css.removeButton}>
-        x
+        X
       </Button>
     );
     return (
