@@ -1,28 +1,29 @@
 import { Component } from "react";
 import _ from "lodash";
 
-import CookieService from "../../services/cookie-service";
-import GuidService from "../../services/guid-service";
-import CookieConstants from "../../constants/cookie-constants";
 import { CartContext } from "../../contexts/cart-context";
+import CookieConstants from "../../constants/cookie-constants";
 
 class CartManager extends Component {
   componentDidMount() {
-    const cookieService = new CookieService();
+    const {cookieService, moltinService, guidService} = this.props;
     var cartId = cookieService.get(CookieConstants.keys.cart_id);
     if (_.isEmpty(cartId)) {
-      const guidService = new GuidService();
       const guid = guidService.generate();
       cartId = guid;
       cookieService.set(CookieConstants.keys.cart_id, guid, { expires: 7 });
     }
-    this.props.moltinService.getCart().then(cart => {
-      return this.setState({
-        cart: cart.data,
-        visible: false
+    cartId = cookieService.get(CookieConstants.keys.cart_id) ["cart-id"];
+    moltinService.getCart(cartId).then(cart => {
+      moltinService.getCartItems(cartId).then(items => {
+        cart.items = items;
+        this.setState({
+          cart,
+          visible: false
+        });
       });
     });
-  }
+  };
 
   addToCart = cartId => (productId, quantity) => {
     this.props.moltinService
@@ -31,7 +32,7 @@ class CartManager extends Component {
         const cart = this.state.cart;
         cart.items = cartItems;
         this.setState({
-          cart,
+          cart: cart,
           visible: true
         });
       });
@@ -66,8 +67,8 @@ class CartManager extends Component {
       <CartContext.Provider
         value={{
           cart: this.state.cart,
-          addToCart: this.addToCart(this.state.cart.id),
-          removeFromCart: this.removeFromCart(this.state.cart.id),
+          addToCart: this.addToCart(this.state.cart.data.id),
+          removeFromCart: this.removeFromCart(this.state.cart.data.id),
           show: this.show,
           hide: this.hide,
           visible: this.state.visible

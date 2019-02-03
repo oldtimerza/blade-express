@@ -52,6 +52,8 @@ const MoltinService = function() {
   service.getCategories = () => Moltin.Categories.All();
 
   service.getCart = cartId => Moltin.Cart(cartId).Get();
+  
+  service.getCartItems = cartId => Moltin.Cart(cartId).Items();
 
   service.addToCart = (cartId, productId, quantity) =>
     Moltin.Cart(cartId).AddProduct(productId, quantity);

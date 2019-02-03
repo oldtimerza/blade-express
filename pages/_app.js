@@ -43,7 +43,7 @@ export default class MyApp extends App {
     const { Component, startUpProps, initialProps, router } = this.props;
 
     return (
-      <CartManager moltinService={services.moltinService}>
+      <CartManager {...services}>
         <Layout
           menus={startUpProps.navMenu}
           footer={startUpProps.footer}
