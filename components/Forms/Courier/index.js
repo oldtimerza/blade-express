@@ -7,11 +7,32 @@ import { isEmpty, isMeasurement, isNumeric, isWeight } from "../Validation";
 class CourierForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { loading: false };
   }
 
   submit = e => {
-    console.log(this.state);
+    const valid =
+      !isEmpty(this.state.name) &&
+      !isEmpty(this.state.company) &&
+      !isEmpty(this.state.contactNo) &&
+      isNumeric(this.state.contactNo) &&
+      !isEmpty(this.state.collectionAddress) &&
+      !isEmpty(this.state.deliveryAddress) &&
+      !isEmpty(this.state.length) &&
+      isMeasurement(this.state.length) &&
+      !isEmpty(this.state.width) &&
+      isMeasurement(this.state.width) &&
+      !isEmpty(this.state.height) &&
+      isMeasurement(this.state.height) &&
+      !isEmpty(this.state.quantity) &&
+      isNumeric(this.state.quantity) &&
+      !isEmpty(this.state.weight) &&
+      isWeight(this.state.weight);
+    if (valid) {
+      console.log(this.state);
+    } else {
+      console.log("invalid");
+    }
   };
 
   render() {
