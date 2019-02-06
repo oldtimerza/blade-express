@@ -7,7 +7,7 @@ import CourierForm from "../components/Forms/Courier";
 
 class Courier extends React.Component {
   render() {
-    const { domesticServices, deliveryOptions } = this.props;
+    const { domesticServices, deliveryOptions, mailService } = this.props;
     let domesticServiceCards = <div />;
     if (domesticServices) {
       domesticServiceCards = <Cards cards={domesticServices} />;
@@ -16,7 +16,10 @@ class Courier extends React.Component {
       <div>
         <Section summary="Domestic services">{domesticServiceCards}</Section>
         <Section summary="Request a quote">
-          <CourierForm deliveryOptions={deliveryOptions} />
+          <CourierForm
+            deliveryOptions={deliveryOptions}
+            mailService={mailService}
+          />
         </Section>
       </div>
     );
