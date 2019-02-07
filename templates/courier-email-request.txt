@@ -1,0 +1,11 @@
+company: {{ company }}
+contact: {{ contactNo }}
+collection Address: {{ collectionAddress }}
+delivery Address: {{ deliveryAddress }}
+chosen service: {{ deliveryService }}
+length: {{ length }}
+width: {{ width }}
+height: {{ height }}
+weight: {{ weight }}
+quantity: {{ quantity }}
+comments: {{ comments }}
