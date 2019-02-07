@@ -55,9 +55,7 @@ class CourierForm extends Component {
         quantity,
         comments
       };
-      console.log({ info });
       const response = await this.props.mailService.sendMail(email, name, info);
-      console.log({ response });
     }
   };
 
