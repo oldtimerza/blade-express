@@ -1,32 +1,28 @@
 import axios from "axios";
+import mustache from "mustache";
+
+import template from "../templates/courier-email-request.txt";
 
 const MailService = function() {
   var service = {};
-  const url = "67.207.73.89/mail";
+  const url = "http://67.207.73.89/mail";
   const courier = "/courier";
 
-  service.sendMail = async ({
-    email,
-    name,
-    company,
-    telephone,
-    cellphone,
-    collectionAddress,
-    deliveryAddress,
-    service,
-    dimensions,
-    weight,
-    quantity,
-    comments
-  }) => {
+  service.sendMail = (email, name, data) => {
     try {
-      const response = await axios({
+      const message = mustache.render(template, data);
+      console.log({ message, template });
+      return axios({
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json"
+        },
         method: "post",
         url: url + courier,
         data: {
           email,
           name,
-          message: ""
+          message
         }
       });
     } catch (e) {

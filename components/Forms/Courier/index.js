@@ -10,28 +10,52 @@ class CourierForm extends Component {
     this.state = { loading: false };
   }
 
-  submit = e => {
+  submit = async e => {
+    const {
+      name,
+      email,
+      company,
+      contactNo,
+      collectionAddress,
+      deliveryAddress,
+      length,
+      width,
+      height,
+      weight,
+      quantity,
+      comments
+    } = this.state;
     const valid =
-      !isEmpty(this.state.name) &&
-      !isEmpty(this.state.company) &&
-      !isEmpty(this.state.contactNo) &&
-      isNumeric(this.state.contactNo) &&
-      !isEmpty(this.state.collectionAddress) &&
-      !isEmpty(this.state.deliveryAddress) &&
-      !isEmpty(this.state.length) &&
-      isMeasurement(this.state.length) &&
-      !isEmpty(this.state.width) &&
-      isMeasurement(this.state.width) &&
-      !isEmpty(this.state.height) &&
-      isMeasurement(this.state.height) &&
-      !isEmpty(this.state.quantity) &&
-      isNumeric(this.state.quantity) &&
-      !isEmpty(this.state.weight) &&
-      isWeight(this.state.weight);
+      !isEmpty(name) &&
+      !isEmpty(company) &&
+      !isEmpty(contactNo) &&
+      isNumeric(contactNo) &&
+      !isEmpty(collectionAddress) &&
+      !isEmpty(deliveryAddress) &&
+      !isEmpty(length) &&
+      isMeasurement(length) &&
+      !isEmpty(width) &&
+      isMeasurement(width) &&
+      !isEmpty(height) &&
+      isMeasurement(height) &&
+      !isEmpty(quantity) &&
+      isNumeric(quantity) &&
+      !isEmpty(weight) &&
+      isWeight(weight);
     if (valid) {
-      console.log(this.state);
-    } else {
-      console.log("invalid");
+      const info = {
+        company,
+        contactNo,
+        collectionAddress,
+        deliveryAddress,
+        length,
+        width,
+        height,
+        weight,
+        quantity,
+        comments
+      };
+      const response = await this.props.mailService.sendMail(email, name, info);
     }
   };
 
