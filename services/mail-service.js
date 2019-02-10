@@ -5,7 +5,7 @@ import template from "../templates/courier-email-request.txt";
 
 const MailService = function() {
   var service = {};
-  const url = "http://67.207.73.89/mail";
+  const url = "http://www.blade-express.co.za/api";
   const courier = "/courier";
 
   service.sendMail = (email, name, data) => {
